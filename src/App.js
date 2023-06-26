@@ -3,11 +3,11 @@ import "./App.css";
 import Tooltip from "./components/Tooltip";
 
 function App() {
-    return (
-        <>
-            <Tooltip rightIcon={true} />
-        </>
-    );
+  return (
+    <>
+      <Tooltip />
+    </>
+  );
 }
 
 export default App;
