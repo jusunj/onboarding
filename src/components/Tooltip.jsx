@@ -1,49 +1,71 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import styled, {css} from "styled-components";
 // import { Body12 } from "../styles/typography";
 // import Text_delete_14 from "../svg/Text_delete_14";
 // import Tooltip_arrow from "../svg/Tooltip_arrow";
 
 const Tooltip = ({
-  // width,             // 너비
   direction,         // 방향 >>> east | west | north | south
-  allowArrow,        // 화살표 기능 활성화 여부 >>> true | false
   arrowLocation,     // 화살표 위치 >>>  0 (none) | 1 (왼쪽 또는 위쪽) | 2 (가운데) | 3 (오른쪽 또는 아래쪽)
   icon,              // 아이콘
   text,              // 내용 ex_ <>hello <br/> world</> <!-- for statement 반영도 고려-->
   target,            // tooltip을 연동할 태그
 }) => {
+  const [widthOfTarget, setWidthOfTarget] = useState(0);
+  const [heightOfTarget, setHeightOfTarget] = useState(0);
+  
+  useEffect(()=>{
+    let tooltipWidth = 0, tooltipHeight = 0, targetHeight = 0;
+    tooltipWidth = document.getElementById('tooltip-core')?.offsetWidth ;
+    tooltipHeight = document.getElementById('tooltip-core')?.offsetHeight;
+    targetHeight = document.getElementById('target')?.offsetHeight;
+
+    if (direction == 'north' || direction == 'south') {
+      setWidthOfTarget(tooltipWidth * (-0.5));
+    }
+    else {
+      setWidthOfTarget('none');
+    }
+    
+    if (direction == 'east' || direction == 'west') {
+      setHeightOfTarget(tooltipHeight * (-0.5) + (targetHeight * (0.5)));
+    }
+    else {
+      setHeightOfTarget('none');
+    }
+  }, []);
+
   return (
     <StyledTooltip
-      // width={width}
+      widthOfTarget={widthOfTarget}
+      heightOfTarget={heightOfTarget}
       direction={direction}
-      allowArrow={allowArrow}
       arrowLocation={arrowLocation}
       icon={icon}
       text={text}
       target={target}
     >
       {target}
-      <div className='tooltip-core tooltip-properties'>
-        <div className='text'>{text}</div>
+      <div className='tooltip-core tooltip-properties' id="tooltip-core">
+        <div id='text'>{text}</div>
         {/* {icon && <div className='icon'>{icon}</div>} */}
       </div>
     </StyledTooltip>
   );
 };
 
-const directions = {
+let directions = {
   east: {
-    top: '-5px', bottom: 'none', left: '105%', right: 'none', marginLeft: 'none',
+    top: '0px', bottom: 'none', left: '130%', right: 'none', marginLeft: 'none',
   },
   west: {
-    top: '5px', bottom: 'none', left: 'none', right: '105%', marginLeft: 'none',
+    top: '0px', bottom: 'none', left: 'none', right: '130%', marginLeft: 'none',
   },
   north: {
-    top: 'none', bottom: '100%', left: '50%', right: 'none', marginLeft: '-75px',
+    top: 'none', bottom: '140%', left: '50%', right: 'none', marginLeft: '-100px',
   },
   south: {
-    top: '100%', bottom: 'none', left: '50%', right: 'none', marginLeft: '-75px',
+    top: '140%', bottom: 'none', left: '50%', right: 'none', marginLeft: '-100px',
   },
 };
 
@@ -112,19 +134,6 @@ const selectRight = ((direction)=>{
       return directions.north.right;
     case 'south':
       return directions.south.right;
-  }
-});
-
-const selectMarginLeft = ((direction)=>{
-  switch(direction) {
-    case 'east':
-      return directions.east.marginLeft;
-    case 'west':
-      return directions.west.marginLeft;
-    case 'north':
-      return directions.north.marginLeft;
-    case 'south':
-      return directions.south.marginLeft;
   }
 });
 
@@ -219,15 +228,13 @@ const selectArrowBorderColor = ((direction)=>{
   }
 });
 
-
 const StyledTooltip = styled.div`
   position: relative;
 	display: inline-block;
-	border-bottom: 1px dashed grey;
+  white-space : nowrap;
 
   .tooltip-properties {
     visibility: hidden;
-    /* width: ${(props)=>props.width}; */
     background-color: #000;
     color: #fff;
     text-align: center;
@@ -240,11 +247,12 @@ const StyledTooltip = styled.div`
     bottom: ${(props)=>selectBottom(props.direction)};
     left: ${(props)=>selectLeft(props.direction)};
     right: ${(props)=>selectRight(props.direction)};
-    margin-left: ${(props)=>selectMarginLeft(props.direction)};
+    margin-left: ${(props)=>props.widthOfTarget}px;
+    margin-top: ${(props)=>props.heightOfTarget}px;
   }
 
   ${(props)=>
-    props.allowArrow &&
+    props.arrowLocation &&
     css`
     .tooltip-properties::after {
       content: " ";
@@ -262,6 +270,30 @@ const StyledTooltip = styled.div`
       border-color: ${(props)=>selectArrowBorderColor(props.direction)};
     }
     `
+  }
+
+  ${(props)=>
+    ((props.arrowLocation === 1) && ((props.direction === 'north') || (props.direction === 'south'))) &&
+    css`
+      .tooltip-properties {
+        margin-left: ${(props.widthOfTarget)*0.4}px;
+      }
+      .tooltip-properties::after {
+        left: 20%;
+      }
+    }`
+  }
+
+  ${(props)=>
+    ((props.arrowLocation === 3) && ((props.direction === 'north') || (props.direction === 'south'))) &&
+    css`
+      .tooltip-properties {
+        margin-left: -${(props.widthOfTarget)*0.4}px;
+      }
+      .tooltip-properties::after {
+        left: 80%;
+      }
+    }`
   }
 
   &:hover .tooltip-core {
