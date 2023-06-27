@@ -5,12 +5,13 @@ import Tooltip from "./components/Tooltip";
 function App() {
   return (
     <>
-      <div style={{margin: '150px;', padding: '150px;'}}>
+      <div style={{padding: '400px'}}>
         <Tooltip
-          width={'300px'} direction={'east'}
+          // width={'150px'}
+          direction={'south'}
           allowArrow={true} allowLocation={2}
-          icon={null} text={'hello world!'}
-          target={<p>Target!</p>}
+          icon={null} text={<div>'~~~~~~~~~~~~~~~~~~'<br/>'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br/>~~~~~~~~~~</div>}
+          target={'Target'}
         />
       </div>
     </>
