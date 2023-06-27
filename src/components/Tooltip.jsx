@@ -11,8 +11,8 @@ const Tooltip = ({
   text,              // 내용 ex_ <>hello <br/> world</> <!-- for statement 반영도 고려-->
   target,            // tooltip을 연동할 태그
 }) => {
-  const [widthOfTarget, setWidthOfTarget] = useState(0);
-  const [heightOfTarget, setHeightOfTarget] = useState(0);
+  const [widthOfTooltip, setWidthOfTooltip] = useState(0);
+  const [heightOfTooltip, setHeightOfTooltip] = useState(0);
   
   useEffect(()=>{
     let tooltipWidth = 0, tooltipHeight = 0, targetHeight = 0;
@@ -21,24 +21,24 @@ const Tooltip = ({
     targetHeight = document.getElementById('target')?.offsetHeight;
 
     if (direction == 'north' || direction == 'south') {
-      setWidthOfTarget(tooltipWidth * (-0.5));
+      setWidthOfTooltip(tooltipWidth * (-0.5));
     }
     else {
-      setWidthOfTarget('none');
+      setWidthOfTooltip('none');
     }
     
     if (direction == 'east' || direction == 'west') {
-      setHeightOfTarget(tooltipHeight * (-0.5) + (targetHeight * (0.5)));
+      setHeightOfTooltip(tooltipHeight * (-0.5) + (targetHeight * (0.5)));
     }
     else {
-      setHeightOfTarget('none');
+      setHeightOfTooltip('none');
     }
   }, []);
 
   return (
     <StyledTooltip
-      widthOfTarget={widthOfTarget}
-      heightOfTarget={heightOfTarget}
+      widthOfTooltip={widthOfTooltip}
+      heightOfTooltip={heightOfTooltip}
       direction={direction}
       arrowLocation={arrowLocation}
       icon={icon}
@@ -77,10 +77,10 @@ const arrowDirections = {
     top: '50%', bottom: 'none', left: '100%', right: 'none', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent transparent transparent black'
   },
   south: { 
-    top: 'none', bottom: '100%', left: '50%', right: 'none', marginTop: 'none', marginLeft: '-5px', borderColor: 'transparent transparent black transparent'
+    top: 'none', bottom: '100%', left: 'none', right: 'none', marginTop: 'none', marginLeft: '-5px', borderColor: 'transparent transparent black transparent'
   },
   north: {
-    top: '100%', bottom: 'none', left: '50%', right: 'none', marginTop: 'none', marginLeft: '-5px', borderColor: 'black transparent transparent transparent'
+    top: '100%', bottom: 'none', left: 'none', right: 'none', marginTop: 'none', marginLeft: '-5px', borderColor: 'black transparent transparent transparent'
   },
 }
 
@@ -247,8 +247,8 @@ const StyledTooltip = styled.div`
     bottom: ${(props)=>selectBottom(props.direction)};
     left: ${(props)=>selectLeft(props.direction)};
     right: ${(props)=>selectRight(props.direction)};
-    margin-left: ${(props)=>props.widthOfTarget}px;
-    margin-top: ${(props)=>props.heightOfTarget}px;
+    margin-left: ${(props)=>props.widthOfTooltip}px;
+    margin-top: ${(props)=>props.heightOfTooltip}px;
   }
 
   ${(props)=>
@@ -276,10 +276,10 @@ const StyledTooltip = styled.div`
     ((props.arrowLocation === 1) && ((props.direction === 'north') || (props.direction === 'south'))) &&
     css`
       .tooltip-properties {
-        margin-left: ${(props.widthOfTarget)*0.4}px;
+        margin-left: ${(props.widthOfTooltip) * 0.5 + 40}px;
       }
       .tooltip-properties::after {
-        left: 20%;
+        left: 14px;
       }
     }`
   }
@@ -288,10 +288,10 @@ const StyledTooltip = styled.div`
     ((props.arrowLocation === 3) && ((props.direction === 'north') || (props.direction === 'south'))) &&
     css`
       .tooltip-properties {
-        margin-left: -${(props.widthOfTarget)*0.4}px;
+        margin-left: ${(props.widthOfTooltip)*2 + 20}px;
       }
       .tooltip-properties::after {
-        left: 80%;
+        right: 14px;
       }
     }`
   }
