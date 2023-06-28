@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Header10, Header12 } from "../../StyleGuide/typography";
+import { Header10, Header12 } from "../styles/typography";
 
 //예시 컴포넌트
 
 const PathChip = ({ size, color, bgColor, leftIcon, text }) => {
+  // size : tiny, medium
+
   return (
     <StyledPathChip
       color={color}
