@@ -8,17 +8,19 @@ function App() {
     <>
       <div style={{ padding: "600px" }}>
         <Tooltip
-          direction={"north"}
-          arrowLocation={2}
+          direction={"east"}
+          arrowLocation={3}
           icon={null}
           text={
             <div>
-              이런 식의 사용이 가능합니다.
-              <br />- - -<br />
+              이런 식의 사용이 가능합니다
+              <br/>
+              ---
+              <br/>
               개행을 사용합니다.
             </div>
           }
-          target={<button id="target">TOOLTIP ME</button>} // target 은 id='target' 을 속성으로 가져야 합니다.
+          target={<button id="target">TOOLTIP<br/>ME</button>} // target 은 id='target' 을 속성으로 가져야 합니다.
         />
         {/* <PathChip
           bgColor={{ background: "pink" }}

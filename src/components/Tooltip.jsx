@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from "react";
 import styled, {css} from "styled-components";
 import { Body12 } from "../styles/typography";
-// import Text_delete_14 from "../svg/Text_delete_14";
-// import Tooltip_arrow from "../svg/Tooltip_arrow";
+import Text_delete_14 from "../svg/Text_delete_14";
+import Tooltip_arrow from "../svg/Tooltip_arrow";
 
 const Tooltip = ({
   direction,         // 방향 >>> east | west | north | south
@@ -20,7 +20,7 @@ const Tooltip = ({
     tooltipWidth = document.getElementById('tooltip-core')?.offsetWidth ;
     tooltipHeight = document.getElementById('tooltip-core')?.offsetHeight;
     targetHeight = document.getElementById('target')?.offsetHeight;
-
+    
     if (direction == 'north' || direction == 'south') {
       setWidthOfTooltip(tooltipWidth * (-0.5));
     }
@@ -29,15 +29,13 @@ const Tooltip = ({
     }
     
     if (direction == 'east' || direction == 'west') {
-      // setHeightOfTooltip(tooltipHeight * (-0.5) + targetHeight);
-      console.log(targetHeight);
       setHeightOfTooltip(tooltipHeight * 0.5);
       setHeightOfTarget(targetHeight);
     }
     else {
       setHeightOfTooltip('none');
     }
-  }, [direction, target]);
+  }, [direction, target, text]);
 
   return (
     <StyledTooltip
@@ -76,11 +74,9 @@ let directions = {
 
 const arrowDirections = {
   east: {
-    // top: '50%', bottom: 'none', left: 'none', right: '100%', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent black transparent transparent'
     top: 'none', bottom: 'none', left: 'none', right: '100%', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent black transparent transparent'
   },
   west: {
-    // top: '50%', bottom: 'none', left: '100%', right: 'none', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent transparent transparent black'
     top: 'none', bottom: 'none', left: '100%', right: 'none', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent transparent transparent black'
   },
   south: { 
@@ -161,36 +157,36 @@ const selectArrowBottom = ((direction)=>{
   switch(direction) {
     case 'east':
       return arrowDirections.east.bottom;
-      case 'west':
-        return arrowDirections.west.bottom;
-        case 'north':
-          return arrowDirections.north.bottom;
-          case 'south':
-            return arrowDirections.south.bottom;
-          }
-        });
+    case 'west':
+      return arrowDirections.west.bottom;
+    case 'north':
+      return arrowDirections.north.bottom;
+    case 'south':
+      return arrowDirections.south.bottom;
+  }
+});
         
-        const selectArrowLeft = ((direction)=>{
-          switch(direction) {
-            case 'east':
-              return arrowDirections.east.left;
-              case 'west':
-                return arrowDirections.west.left;
-                case 'north':
-                  return arrowDirections.north.left;
-                  case 'south':
-                    return arrowDirections.south.left;
-                  }
-                });
-                
-                const selectArrowRight = ((direction)=>{
-                  switch(direction) {
-                    case 'east':
-                      return arrowDirections.east.right;
-                      case 'west':
-                        return arrowDirections.west.right;
-                        case 'north':
-                          return arrowDirections.north.right;
+const selectArrowLeft = ((direction)=>{
+  switch(direction) {
+    case 'east':
+      return arrowDirections.east.left;
+    case 'west':
+      return arrowDirections.west.left;
+    case 'north':
+      return arrowDirections.north.left;
+    case 'south':
+      return arrowDirections.south.left;
+  }
+});
+              
+const selectArrowRight = ((direction)=>{
+  switch(direction) {
+    case 'east':
+      return arrowDirections.east.right;
+    case 'west':
+      return arrowDirections.west.right;
+    case 'north':
+      return arrowDirections.north.right;
     case 'south':
       return arrowDirections.south.right;
     }
@@ -307,8 +303,8 @@ const StyledTooltip = styled.div`
       ((props.arrowLocation === 2) && ((props.direction === 'east') || (props.direction === 'west'))) &&
       css`
       .tooltip-properties {
-        top: 5px;
-        margin-top: -30%;
+        top: 0px;
+        margin-top: ${-(props.heightOfTooltip) + (0.5 * props.heightOfTarget)}px;
       }
       .tooltip-properties::after {
         top: 50%;
@@ -326,12 +322,12 @@ const StyledTooltip = styled.div`
       right: 14px;
     }`
   }
-  
+
   ${(props)=>
     ((props.arrowLocation === 3) && ((props.direction === 'east') || (props.direction === 'west'))) &&
     css`
     .tooltip-properties {
-        margin-top: ${-(props.heightOfTooltip) -15 + (props.heightOfTarget * 0.5)}px;
+        margin-top: ${(props.heightOfTarget) -(props.heightOfTooltip * 2)}px;
       }
       .tooltip-properties::after {
         bottom: 14px;
@@ -339,9 +335,11 @@ const StyledTooltip = styled.div`
     }`
   }
 
-  &:hover .tooltip-core {
-		visibility: visible;
-	}
+  @media(min-width: 791px) {
+    &:hover .tooltip-core {
+      visibility: visible;
+    }
+  }
 
   .icon {
     width: 14px;
