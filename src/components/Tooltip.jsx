@@ -68,6 +68,7 @@ const Tooltip = ({
       initialExposure={initialExposure}
       onMouseEnter={()=>{if(!initialExposure) setIsVisible(true)}}
       onMouseLeave={()=>{if(!icon) setIsVisible(false)}}
+      onClick={()=>{setIsVisible(!isVisible)}}
     >
       
       {target}

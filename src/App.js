@@ -24,7 +24,7 @@ function App() {
           gap={10}
           move={0}
           icon={<Text_delete_14 />}
-          initialExposure={true}
+          initialExposure={false}
         />
 
         {/* <PathChip
