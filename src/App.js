@@ -9,9 +9,8 @@ function App() {
       <div style={{ padding: "600px" }}>
 
         <Tooltip
-          direction={"south"}
-          arrowLocation={0}
-          
+          direction={"north"}
+          arrowLocation={2}
           text={
             <div>
               이런 식의 사용이 가능합니다
@@ -23,9 +22,9 @@ function App() {
           }
           target={<button id="target">TOOL<br/>4213 </button>} // target 은 id='target' 을 속성으로 가져야 합니다.
           gap={10}
-          move={-20}
+          move={0}
           icon={<Text_delete_14 />}
-          initialExposure={false}
+          initialExposure={true}
         />
 
         {/* <PathChip

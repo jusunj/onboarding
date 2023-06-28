@@ -349,6 +349,19 @@ const StyledTooltip = styled.div`
   }
 
   ${(props)=>
+    ((props.arrowLocation === 2) && ((props.direction === 'north') || (props.direction === 'south'))) &&
+    css`
+    .tooltip-properties {
+      left: 0px;
+      margin-left: ${(props.move) + (props.widthOfTooltip) + (props.widthOfTarget * 0.5)}px;
+    }
+    .tooltip-properties::after {
+      left: 50%;
+    }
+  }`
+}
+
+  ${(props)=>
       ((props.arrowLocation === 2) && ((props.direction === 'east') || (props.direction === 'west'))) &&
       css`
       .tooltip-properties {
