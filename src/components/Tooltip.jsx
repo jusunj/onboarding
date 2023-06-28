@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from "react";
 import styled, {css} from "styled-components";
-// import { Body12 } from "../styles/typography";
+import { Body12 } from "../styles/typography";
 // import Text_delete_14 from "../svg/Text_delete_14";
 // import Tooltip_arrow from "../svg/Tooltip_arrow";
 
@@ -13,6 +13,7 @@ const Tooltip = ({
 }) => {
   const [widthOfTooltip, setWidthOfTooltip] = useState(0);
   const [heightOfTooltip, setHeightOfTooltip] = useState(0);
+  const [heightOfTarget, setHeightOfTarget] = useState(0);
   
   useEffect(()=>{
     let tooltipWidth = 0, tooltipHeight = 0, targetHeight = 0;
@@ -28,17 +29,21 @@ const Tooltip = ({
     }
     
     if (direction == 'east' || direction == 'west') {
-      setHeightOfTooltip(tooltipHeight * (-0.5) + (targetHeight * (0.5)));
+      // setHeightOfTooltip(tooltipHeight * (-0.5) + targetHeight);
+      console.log(targetHeight);
+      setHeightOfTooltip(tooltipHeight * 0.5);
+      setHeightOfTarget(targetHeight);
     }
     else {
       setHeightOfTooltip('none');
     }
-  }, []);
+  }, [direction, target]);
 
   return (
     <StyledTooltip
       widthOfTooltip={widthOfTooltip}
       heightOfTooltip={heightOfTooltip}
+      heightOfTarget={heightOfTarget}
       direction={direction}
       arrowLocation={arrowLocation}
       icon={icon}
@@ -71,10 +76,12 @@ let directions = {
 
 const arrowDirections = {
   east: {
-    top: '50%', bottom: 'none', left: 'none', right: '100%', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent black transparent transparent'
+    // top: '50%', bottom: 'none', left: 'none', right: '100%', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent black transparent transparent'
+    top: 'none', bottom: 'none', left: 'none', right: '100%', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent black transparent transparent'
   },
   west: {
-    top: '50%', bottom: 'none', left: '100%', right: 'none', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent transparent transparent black'
+    // top: '50%', bottom: 'none', left: '100%', right: 'none', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent transparent transparent black'
+    top: 'none', bottom: 'none', left: '100%', right: 'none', marginTop: '-5px', marginLeft: 'none', borderColor: 'transparent transparent transparent black'
   },
   south: { 
     top: 'none', bottom: '100%', left: 'none', right: 'none', marginTop: 'none', marginLeft: '-5px', borderColor: 'transparent transparent black transparent'
@@ -88,149 +95,149 @@ const selectTop = ((direction)=>{
   switch(direction) {
     case 'east':
       return directions.east.top;
-    case 'west':
-      return directions.west.top;
-    case 'north':
-      return directions.north.top;
-    case 'south':
-      return directions.south.top;
-  }
-});
-
-const selectBottom = ((direction)=>{
-  switch(direction) {
-    case 'east':
-      return directions.east.bottom;
-    case 'west':
-      return directions.west.bottom;
+      case 'west':
+        return directions.west.top;
+        case 'north':
+          return directions.north.top;
+          case 'south':
+            return directions.south.top;
+          }
+        });
+        
+        const selectBottom = ((direction)=>{
+          switch(direction) {
+            case 'east':
+              return directions.east.bottom;
+              case 'west':
+                return directions.west.bottom;
     case 'north':
       return directions.north.bottom;
-    case 'south':
-      return directions.south.bottom;
+      case 'south':
+        return directions.south.bottom;
+        
+      }
+    });
+    
+    const selectLeft = ((direction)=>{
+      switch(direction) {
+        case 'east':
+          return directions.east.left;
+          case 'west':
+            return directions.west.left;
+            case 'north':
+              return directions.north.left;
+              case 'south':
+                return directions.south.left;
+              }
+            });
 
-  }
-});
-
-const selectLeft = ((direction)=>{
-  switch(direction) {
-    case 'east':
-      return directions.east.left;
-    case 'west':
-      return directions.west.left;
-    case 'north':
-      return directions.north.left;
-    case 'south':
-      return directions.south.left;
-  }
-});
-
-const selectRight = ((direction)=>{
-  switch(direction) {
-    case 'east':
-      return directions.east.right;
-    case 'west':
-      return directions.west.right;
-    case 'north':
-      return directions.north.right;
-    case 'south':
-      return directions.south.right;
-  }
-});
-
-const selectArrowTop = ((direction)=>{
-  switch(direction) {
-    case 'east':
-      return arrowDirections.east.top;
+            const selectRight = ((direction)=>{
+              switch(direction) {
+                case 'east':
+                  return directions.east.right;
+                  case 'west':
+                    return directions.west.right;
+                    case 'north':
+                      return directions.north.right;
+                      case 'south':
+                        return directions.south.right;
+                      }
+                    });
+                    
+                    const selectArrowTop = ((direction)=>{
+                      switch(direction) {
+                        case 'east':
+                          return arrowDirections.east.top;
     case 'west':
       return arrowDirections.west.top;
-    case 'north':
-      return arrowDirections.north.top;
-    case 'south':
-      return arrowDirections.south.top;
-  }
-});
-
+      case 'north':
+        return arrowDirections.north.top;
+        case 'south':
+          return arrowDirections.south.top;
+        }
+      });
+      
 const selectArrowBottom = ((direction)=>{
   switch(direction) {
     case 'east':
       return arrowDirections.east.bottom;
-    case 'west':
-      return arrowDirections.west.bottom;
-    case 'north':
-      return arrowDirections.north.bottom;
-    case 'south':
-      return arrowDirections.south.bottom;
-  }
-});
-
-const selectArrowLeft = ((direction)=>{
-  switch(direction) {
-    case 'east':
-      return arrowDirections.east.left;
-    case 'west':
-      return arrowDirections.west.left;
-    case 'north':
-      return arrowDirections.north.left;
-    case 'south':
-      return arrowDirections.south.left;
-  }
-});
-
-const selectArrowRight = ((direction)=>{
-  switch(direction) {
-    case 'east':
-      return arrowDirections.east.right;
-    case 'west':
-      return arrowDirections.west.right;
-    case 'north':
-      return arrowDirections.north.right;
+      case 'west':
+        return arrowDirections.west.bottom;
+        case 'north':
+          return arrowDirections.north.bottom;
+          case 'south':
+            return arrowDirections.south.bottom;
+          }
+        });
+        
+        const selectArrowLeft = ((direction)=>{
+          switch(direction) {
+            case 'east':
+              return arrowDirections.east.left;
+              case 'west':
+                return arrowDirections.west.left;
+                case 'north':
+                  return arrowDirections.north.left;
+                  case 'south':
+                    return arrowDirections.south.left;
+                  }
+                });
+                
+                const selectArrowRight = ((direction)=>{
+                  switch(direction) {
+                    case 'east':
+                      return arrowDirections.east.right;
+                      case 'west':
+                        return arrowDirections.west.right;
+                        case 'north':
+                          return arrowDirections.north.right;
     case 'south':
       return arrowDirections.south.right;
-  }
+    }
 });
 
 const selectArrowMarginTop = ((direction)=>{
   switch(direction) {
     case 'east':
       return arrowDirections.east.marginTop;
-    case 'west':
-      return arrowDirections.west.marginTop;
-    case 'north':
-      return arrowDirections.north.marginTop;
-    case 'south':
-      return arrowDirections.south.marginTop;
-  }
-});
-
-const selectArrowMarginLeft = ((direction)=>{
-  switch(direction) {
-    case 'east':
-      return arrowDirections.east.marginLeft;
-    case 'west':
-      return arrowDirections.west.marginLeft;
-    case 'north':
-      return arrowDirections.north.marginLeft;
-    case 'south':
-      return arrowDirections.south.marginLeft;
-  }
-});
-
-const selectArrowBorderColor = ((direction)=>{
-  switch(direction) {
-    case 'east':
-      return arrowDirections.east.borderColor;
-    case 'west':
-      return arrowDirections.west.borderColor;
-    case 'north':
-      return arrowDirections.north.borderColor;
-    case 'south':
+      case 'west':
+        return arrowDirections.west.marginTop;
+        case 'north':
+          return arrowDirections.north.marginTop;
+          case 'south':
+            return arrowDirections.south.marginTop;
+          }
+        });
+        
+        const selectArrowMarginLeft = ((direction)=>{
+          switch(direction) {
+            case 'east':
+              return arrowDirections.east.marginLeft;
+              case 'west':
+                return arrowDirections.west.marginLeft;
+                case 'north':
+                  return arrowDirections.north.marginLeft;
+                  case 'south':
+                    return arrowDirections.south.marginLeft;
+                  }
+                });
+                
+                const selectArrowBorderColor = ((direction)=>{
+                  switch(direction) {
+                    case 'east':
+                      return arrowDirections.east.borderColor;
+                      case 'west':
+                        return arrowDirections.west.borderColor;
+                        case 'north':
+                          return arrowDirections.north.borderColor;
+                          case 'south':
       return arrowDirections.south.borderColor;
   }
 });
 
 const StyledTooltip = styled.div`
   position: relative;
-	display: inline-block;
+  display: inline-block;
   white-space : nowrap;
 
   .tooltip-properties {
@@ -242,7 +249,7 @@ const StyledTooltip = styled.div`
     padding: 10px;
     position: absolute;
     z-index: 1;
-
+    
     top: ${(props)=>selectTop(props.direction)};
     bottom: ${(props)=>selectBottom(props.direction)};
     left: ${(props)=>selectLeft(props.direction)};
@@ -259,7 +266,7 @@ const StyledTooltip = styled.div`
       position: absolute;
       border-width: 5px;
       border-style: solid;
-
+      
       top: ${(props)=>selectArrowTop(props.direction)};
       bottom: ${(props)=>selectArrowBottom(props.direction)};
       left: ${(props)=>selectArrowLeft(props.direction)};
@@ -274,7 +281,7 @@ const StyledTooltip = styled.div`
 
   ${(props)=>
     ((props.arrowLocation === 1) && ((props.direction === 'north') || (props.direction === 'south'))) &&
-    css`
+      css`
       .tooltip-properties {
         margin-left: ${(props.widthOfTooltip) * 0.5 + 40}px;
       }
@@ -285,13 +292,49 @@ const StyledTooltip = styled.div`
   }
 
   ${(props)=>
-    ((props.arrowLocation === 3) && ((props.direction === 'north') || (props.direction === 'south'))) &&
+    ((props.arrowLocation === 1) && ((props.direction === 'east') || (props.direction === 'west'))) &&
     css`
       .tooltip-properties {
-        margin-left: ${(props.widthOfTooltip)*2 + 20}px;
+        margin-top: ${(props.heightOfTarget * 0.5) - 14}px;
       }
       .tooltip-properties::after {
-        right: 14px;
+        top: 14px;
+      }
+    }`
+  }
+
+  ${(props)=>
+      ((props.arrowLocation === 2) && ((props.direction === 'east') || (props.direction === 'west'))) &&
+      css`
+      .tooltip-properties {
+        top: 5px;
+        margin-top: -30%;
+      }
+      .tooltip-properties::after {
+        top: 50%;
+      }
+    }`
+  }
+  
+  ${(props)=>
+    ((props.arrowLocation === 3) && ((props.direction === 'north') || (props.direction === 'south'))) &&
+    css`
+    .tooltip-properties {
+      margin-left: ${(props.widthOfTooltip) * 2 + 20}px;
+    }
+    .tooltip-properties::after {
+      right: 14px;
+    }`
+  }
+  
+  ${(props)=>
+    ((props.arrowLocation === 3) && ((props.direction === 'east') || (props.direction === 'west'))) &&
+    css`
+    .tooltip-properties {
+        margin-top: ${-(props.heightOfTooltip) -15 + (props.heightOfTarget * 0.5)}px;
+      }
+      .tooltip-properties::after {
+        bottom: 14px;
       }
     }`
   }

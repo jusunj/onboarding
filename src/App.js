@@ -7,10 +7,9 @@ function App() {
   return (
     <>
       <div style={{ padding: "600px" }}>
-        1234123412341234123412341234123412342134
         <Tooltip
-          direction={"south"}
-          arrowLocation={3}
+          direction={"north"}
+          arrowLocation={2}
           icon={null}
           text={
             <div>
@@ -19,14 +18,14 @@ function App() {
               개행을 사용합니다.
             </div>
           }
-          target={<button id="target">123</button>} // target 은 id='target' 을 속성으로 가져야 합니다.
+          target={<button id="target">TOOLTIP ME</button>} // target 은 id='target' 을 속성으로 가져야 합니다.
         />
-        <PathChip
+        {/* <PathChip
           bgColor={{ background: "pink" }}
           color={{ color: "red" }}
           size="tiny"
           text="라벨"
-        />
+        /> */}
       </div>
     </>
   );
