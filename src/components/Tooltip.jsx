@@ -10,6 +10,7 @@ const Tooltip = ({
   icon,              // 아이콘
   text,              // 내용 ex_ <>hello <br/> world</> <!-- for statement 반영도 고려-->
   target,            // tooltip을 연동할 태그
+  gap,               // tooltip과 타겟 간 거리
 }) => {
   const [widthOfTooltip, setWidthOfTooltip] = useState(0);
   const [heightOfTooltip, setHeightOfTooltip] = useState(0);
@@ -47,6 +48,7 @@ const Tooltip = ({
       icon={icon}
       text={text}
       target={target}
+      gap={gap}
     >
       {target}
       <div className='tooltip-core tooltip-properties' id="tooltip-core">
@@ -140,10 +142,10 @@ const selectTop = ((direction)=>{
                       }
                     });
                     
-                    const selectArrowTop = ((direction)=>{
-                      switch(direction) {
-                        case 'east':
-                          return arrowDirections.east.top;
+  const selectArrowTop = ((direction)=>{
+    switch(direction) {
+      case 'east':
+        return arrowDirections.east.top;
     case 'west':
       return arrowDirections.west.top;
       case 'north':
@@ -236,6 +238,8 @@ const StyledTooltip = styled.div`
   display: inline-block;
   white-space : nowrap;
 
+  ${Body12}
+
   .tooltip-properties {
     visibility: hidden;
     background-color: #000;
@@ -246,10 +250,10 @@ const StyledTooltip = styled.div`
     position: absolute;
     z-index: 1;
     
-    top: ${(props)=>selectTop(props.direction)};
-    bottom: ${(props)=>selectBottom(props.direction)};
-    left: ${(props)=>selectLeft(props.direction)};
-    right: ${(props)=>selectRight(props.direction)};
+    top: ${(props)=>(props.direction == 'south') ? `${props.gap}%` : selectTop(props.direction)};
+    bottom: ${(props)=>(props.direction == 'north') ? `${props.gap}%` : selectBottom(props.direction)};
+    left: ${(props)=>(props.direction == 'east') ? `${props.gap}%` : selectLeft(props.direction)};
+    right: ${(props)=>(props.direction == 'west') ? `${props.gap}%` : selectRight(props.direction)};
     margin-left: ${(props)=>props.widthOfTooltip}px;
     margin-top: ${(props)=>props.heightOfTooltip}px;
   }

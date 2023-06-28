@@ -8,8 +8,8 @@ function App() {
     <>
       <div style={{ padding: "600px" }}>
         <Tooltip
-          direction={"east"}
-          arrowLocation={3}
+          direction={"west"}
+          arrowLocation={2}
           icon={null}
           text={
             <div>
@@ -21,6 +21,7 @@ function App() {
             </div>
           }
           target={<button id="target">TOOLTIP<br/>ME</button>} // target 은 id='target' 을 속성으로 가져야 합니다.
+          gap={130}
         />
         {/* <PathChip
           bgColor={{ background: "pink" }}
