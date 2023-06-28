@@ -7,22 +7,24 @@ function App() {
   return (
     <>
       <div style={{ padding: "600px" }}>
+
         <Tooltip
           direction={"east"}
-          arrowLocation={1}
+          arrowLocation={3}
           icon={null}
           text={
             <div>
-              이런 식의 사용이 가능합니다
+              이런 식의 사용이 가능합니다 1234
               <br/>
               ---
               <br/>
-              개행을 사용합니다.
+              {/* 개행을 사용합니다. */}
             </div>
           }
-          target={<button id="target">TOOLTIP<br/>ME</button>} // target 은 id='target' 을 속성으로 가져야 합니다.
-          gap={0}
+          target={<button id="target">TOOL1242<br/>13<br/>4213 </button>} // target 은 id='target' 을 속성으로 가져야 합니다.
+          gap={10}
         />
+
         {/* <PathChip
           bgColor={{ background: "pink" }}
           color={{ color: "red" }}

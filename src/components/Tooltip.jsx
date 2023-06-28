@@ -40,7 +40,7 @@ const Tooltip = ({
     
     setHeightOfTarget(targetHeight);
     setWidthOfTarget(targetWidth);
-  }, [direction, target, text]);
+  }, [direction, target, text, arrowLocation]);
 
   return (
     <StyledTooltip
@@ -146,18 +146,18 @@ const selectBottom = ((direction)=>{
                       }
                     });
                     
-  const selectArrowTop = ((direction)=>{
-    switch(direction) {
-      case 'east':
-        return arrowDirections.east.top;
+const selectArrowTop = ((direction)=>{
+  switch(direction) {
+    case 'east':
+      return arrowDirections.east.top;
     case 'west':
       return arrowDirections.west.top;
-      case 'north':
-        return arrowDirections.north.top;
-        case 'south':
-          return arrowDirections.south.top;
-        }
-      });
+    case 'north':
+      return arrowDirections.north.top;
+    case 'south':
+      return arrowDirections.south.top;
+  }
+});
       
 const selectArrowBottom = ((direction)=>{
   switch(direction) {
@@ -202,37 +202,37 @@ const selectArrowMarginTop = ((direction)=>{
   switch(direction) {
     case 'east':
       return arrowDirections.east.marginTop;
-      case 'west':
-        return arrowDirections.west.marginTop;
-        case 'north':
-          return arrowDirections.north.marginTop;
-          case 'south':
-            return arrowDirections.south.marginTop;
-          }
-        });
-        
-        const selectArrowMarginLeft = ((direction)=>{
-          switch(direction) {
-            case 'east':
-              return arrowDirections.east.marginLeft;
-              case 'west':
-                return arrowDirections.west.marginLeft;
-                case 'north':
-                  return arrowDirections.north.marginLeft;
-                  case 'south':
-                    return arrowDirections.south.marginLeft;
-                  }
-                });
+    case 'west':
+      return arrowDirections.west.marginTop;
+    case 'north':
+      return arrowDirections.north.marginTop;
+    case 'south':
+      return arrowDirections.south.marginTop;
+  }
+});
+
+const selectArrowMarginLeft = ((direction)=>{
+  switch(direction) {
+    case 'east':
+      return arrowDirections.east.marginLeft;
+    case 'west':
+      return arrowDirections.west.marginLeft;
+    case 'north':
+      return arrowDirections.north.marginLeft;
+    case 'south':
+      return arrowDirections.south.marginLeft;
+  }
+});
                 
-                const selectArrowBorderColor = ((direction)=>{
-                  switch(direction) {
-                    case 'east':
-                      return arrowDirections.east.borderColor;
-                      case 'west':
-                        return arrowDirections.west.borderColor;
-                        case 'north':
-                          return arrowDirections.north.borderColor;
-                          case 'south':
+const selectArrowBorderColor = ((direction)=>{
+  switch(direction) {
+    case 'east':
+      return arrowDirections.east.borderColor;
+    case 'west':
+      return arrowDirections.west.borderColor;
+    case 'north':
+      return arrowDirections.north.borderColor;
+    case 'south':
       return arrowDirections.south.borderColor;
   }
 });
@@ -259,7 +259,7 @@ const StyledTooltip = styled.div`
     left: ${(props)=>(props.direction == 'east') ? `${(props.gap) + props.widthOfTarget - 1}px` : selectLeft(props.direction)};
     right: ${(props)=>(props.direction == 'west') ? `${(props.gap) + props.widthOfTarget - 1}px` : selectRight(props.direction)};
     margin-left: ${(props)=>props.widthOfTooltip}px;
-    margin-top: ${(props)=>props.heightOfTooltip}px;
+    margin-top: ${(props)=>(props.arrowLocation ? props.heightOfTooltip : -(props.heightOfTooltip*0.5))}px;
   }
 
   ${(props)=>
@@ -268,7 +268,7 @@ const StyledTooltip = styled.div`
     .tooltip-properties::after {
       content: " ";
       position: absolute;
-      border-width: 5px;
+      border-width: 8px 7px;
       border-style: solid;
       
       top: ${(props)=>selectArrowTop(props.direction)};
@@ -284,10 +284,29 @@ const StyledTooltip = styled.div`
   }
 
   ${(props)=>
+    ((props.arrowLocation === 0) && ((props.direction === 'north') || (props.direction === 'south'))) &&
+    css`
+    .tooltip-properties {
+      margin-left: ${(props.widthOfTooltip) * 0.5 + (props.widthOfTarget * 0.5) - 7}px;
+    }
+    `
+  }
+
+  ${(props)=>
+    ((props.arrowLocation === 0) && ((props.direction === 'east') || (props.direction === 'west'))) &&
+    css`
+    .tooltip-properties {
+      margin-top: -50%;
+    }
+    `
+  }
+
+  ${(props)=>
     ((props.arrowLocation === 1) && ((props.direction === 'north') || (props.direction === 'south'))) &&
       css`
       .tooltip-properties {
-        margin-left: ${(props.widthOfTooltip) * 0.5 + (props.widthOfTarget * 0.5) - 7}px;
+        left: 0px;
+        margin-left: ${(props.widthOfTarget * 0.5) - 14}px;
       }
       .tooltip-properties::after {
         left: 14px;
@@ -312,7 +331,7 @@ const StyledTooltip = styled.div`
       css`
       .tooltip-properties {
         top: 0px;
-        margin-top: ${-(props.heightOfTooltip) + (0.5 * props.heightOfTarget)}px;
+        margin-top: ${-(props.heightOfTooltip) + (0.5 * props.heightOfTarget) - 4}px;
       }
       .tooltip-properties::after {
         top: 50%;
@@ -324,7 +343,7 @@ const StyledTooltip = styled.div`
     ((props.arrowLocation === 3) && ((props.direction === 'north') || (props.direction === 'south'))) &&
     css`
     .tooltip-properties {
-      margin-left: ${(props.widthOfTooltip) - (props.widthOfTarget) + 14}px;
+      margin-left: ${(props.widthOfTooltip) - (props.widthOfTarget)}px;
     }
     .tooltip-properties::after {
       right: 14px;
@@ -335,11 +354,10 @@ const StyledTooltip = styled.div`
     ((props.arrowLocation === 3) && ((props.direction === 'east') || (props.direction === 'west'))) &&
     css`
     .tooltip-properties {
-        margin-top: ${(props.heightOfTarget) -(props.heightOfTooltip * 2)}px;
-      }
-      .tooltip-properties::after {
-        bottom: 14px;
-      }
+      margin-top: ${(props.heightOfTarget) -(props.heightOfTooltip * 2) + 14}px;
+    }
+    .tooltip-properties::after {
+      bottom: 10px;
     }`
   }
 
