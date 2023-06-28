@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from "react";
 import styled, {css} from "styled-components";
 import { Body12 } from "../styles/typography";
-import Text_delete_14 from "../svg/Text_delete_14";
-import Tooltip_arrow from "../svg/Tooltip_arrow";
+// import Text_delete_14 from "../svg/Text_delete_14";
+// import Tooltip_arrow from "../svg/Tooltip_arrow";
 
 const Tooltip = ({
   direction,         // 방향 >>> east | west | north | south
@@ -11,18 +11,27 @@ const Tooltip = ({
   text,              // 내용 ex_ <>hello <br/> world</> <!-- for statement 반영도 고려-->
   target,            // tooltip을 연동할 태그
   gap,               // tooltip과 타겟 간 거리
+  move,              // inline으로 위치를 변경하기 위한 코드
+  initialExposure    // 최초에 보이는 상태일지 결정
 }) => {
   const [widthOfTooltip, setWidthOfTooltip] = useState(0);
   const [heightOfTooltip, setHeightOfTooltip] = useState(0);
   const [heightOfTarget, setHeightOfTarget] = useState(0);
   const [widthOfTarget, setWidthOfTarget] = useState(0);
-  
+  const [isVisible, setIsVisible] = useState(initialExposure);
+
   useEffect(()=>{
     let tooltipWidth = 0, tooltipHeight = 0, targetWidth = 0, targetHeight = 0;
     tooltipWidth = document.getElementById('tooltip-core')?.offsetWidth ;
     tooltipHeight = document.getElementById('tooltip-core')?.offsetHeight;
     targetWidth = document.getElementById('target')?.offsetWidth;
     targetHeight = document.getElementById('target')?.offsetHeight;
+    
+    if (!icon) {
+      document.addEventListener('click', (event)=>{
+        setIsVisible(false);
+      });
+    }
     
     if (direction == 'north' || direction == 'south') {
       setWidthOfTooltip(tooltipWidth * (-0.5));
@@ -37,6 +46,7 @@ const Tooltip = ({
     else {
       setHeightOfTooltip('none');
     }
+
     
     setHeightOfTarget(targetHeight);
     setWidthOfTarget(targetWidth);
@@ -54,11 +64,20 @@ const Tooltip = ({
       text={text}
       target={target}
       gap={gap}
+      move={move}
+      initialExposure={initialExposure}
+      onMouseEnter={()=>{if(!initialExposure) setIsVisible(true)}}
+      onMouseLeave={()=>{if(!icon) setIsVisible(false)}}
     >
+      
       {target}
-      <div className='tooltip-core tooltip-properties' id="tooltip-core">
-        <div id='text'>{text}</div>
-        {/* {icon && <div className='icon'>{icon}</div>} */}
+      <div
+        className='tooltip-core tooltip-properties'
+        id="tooltip-core"
+        style={{visibility: (isVisible ? 'visible' : 'hidden')}}
+      >
+        <div className='text'>{text}</div>
+        {icon && <div className='icon' onClick={()=>{setIsVisible(!isVisible)}} style={{display: "flex", height:"auto", alignItems: "center"}}>{icon}</div>}
       </div>
     </StyledTooltip>
   );
@@ -120,31 +139,31 @@ const selectBottom = ((direction)=>{
   }
 });
     
-    const selectLeft = ((direction)=>{
-      switch(direction) {
-        case 'east':
-          return directions.east.left;
-          case 'west':
-            return directions.west.left;
-            case 'north':
-              return directions.north.left;
-              case 'south':
-                return directions.south.left;
-              }
-            });
+const selectLeft = ((direction)=>{
+  switch(direction) {
+    case 'east':
+      return directions.east.left;
+    case 'west':
+      return directions.west.left;
+    case 'north':
+      return directions.north.left;
+    case 'south':
+      return directions.south.left;
+  }
+});
 
-            const selectRight = ((direction)=>{
-              switch(direction) {
-                case 'east':
-                  return directions.east.right;
-                  case 'west':
-                    return directions.west.right;
-                    case 'north':
-                      return directions.north.right;
-                      case 'south':
-                        return directions.south.right;
-                      }
-                    });
+const selectRight = ((direction)=>{
+  switch(direction) {
+    case 'east':
+      return directions.east.right;
+    case 'west':
+      return directions.west.right;
+    case 'north':
+      return directions.north.right;
+    case 'south':
+      return directions.south.right;
+  }
+});
                     
 const selectArrowTop = ((direction)=>{
   switch(direction) {
@@ -245,6 +264,9 @@ const StyledTooltip = styled.div`
   ${Body12}
 
   .tooltip-properties {
+    display: flex;
+    gap : 10px;
+    // align-item: center;
     visibility: hidden;
     background-color: #000;
     color: #fff;
@@ -306,7 +328,7 @@ const StyledTooltip = styled.div`
       css`
       .tooltip-properties {
         left: 0px;
-        margin-left: ${(props.widthOfTarget * 0.5) - 14}px;
+        margin-left: ${(props.widthOfTarget * 0.5) - 14 + (props.move)}px;
       }
       .tooltip-properties::after {
         left: 14px;
@@ -318,7 +340,7 @@ const StyledTooltip = styled.div`
     ((props.arrowLocation === 1) && ((props.direction === 'east') || (props.direction === 'west'))) &&
     css`
       .tooltip-properties {
-        margin-top: ${(props.heightOfTarget * 0.5) - 14}px;
+        margin-top: ${(props.heightOfTarget * 0.5) - 14  + (props.move)}px;
       }
       .tooltip-properties::after {
         top: 14px;
@@ -331,7 +353,7 @@ const StyledTooltip = styled.div`
       css`
       .tooltip-properties {
         top: 0px;
-        margin-top: ${-(props.heightOfTooltip) + (0.5 * props.heightOfTarget) - 4}px;
+        margin-top: ${-(props.heightOfTooltip) + (0.5 * props.heightOfTarget) - 4  + (props.move)}px;
       }
       .tooltip-properties::after {
         top: 50%;
@@ -343,7 +365,7 @@ const StyledTooltip = styled.div`
     ((props.arrowLocation === 3) && ((props.direction === 'north') || (props.direction === 'south'))) &&
     css`
     .tooltip-properties {
-      margin-left: ${(props.widthOfTooltip) - (props.widthOfTarget)}px;
+      margin-left: ${(props.widthOfTooltip) - (props.widthOfTarget)  + (props.move)}px;
     }
     .tooltip-properties::after {
       right: 14px;
@@ -354,18 +376,18 @@ const StyledTooltip = styled.div`
     ((props.arrowLocation === 3) && ((props.direction === 'east') || (props.direction === 'west'))) &&
     css`
     .tooltip-properties {
-      margin-top: ${(props.heightOfTarget) -(props.heightOfTooltip * 2) + 14}px;
+      margin-top: ${(props.heightOfTarget) -(props.heightOfTooltip * 2) + 14  + (props.move)}px;
     }
     .tooltip-properties::after {
       bottom: 10px;
     }`
   }
 
-  @media(min-width: 791px) {
-    &:hover .tooltip-core {
-      visibility: visible;
-    }
-  }
+  // @media(min-width: 791px) {
+  //   &:hover .tooltip-core {
+  //     visibility: visible;
+  //   }
+  // }
 
   .icon {
     width: 14px;

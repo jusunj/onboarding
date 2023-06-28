@@ -2,27 +2,30 @@ import logo from "./logo.svg";
 import "./App.css";
 import Tooltip from "./components/Tooltip";
 import PathChip from "./components/PathChip";
-
+import Text_delete_14 from "./svg/Text_delete_14";
 function App() {
   return (
     <>
       <div style={{ padding: "600px" }}>
 
         <Tooltip
-          direction={"east"}
-          arrowLocation={3}
-          icon={null}
+          direction={"south"}
+          arrowLocation={0}
+          
           text={
             <div>
-              이런 식의 사용이 가능합니다 1234
+              이런 식의 사용이 가능합니다
               <br/>
               ---
               <br/>
-              {/* 개행을 사용합니다. */}
+              개행도 가능합니다.
             </div>
           }
-          target={<button id="target">TOOL1242<br/>13<br/>4213 </button>} // target 은 id='target' 을 속성으로 가져야 합니다.
+          target={<button id="target">TOOL<br/>4213 </button>} // target 은 id='target' 을 속성으로 가져야 합니다.
           gap={10}
+          move={-20}
+          icon={<Text_delete_14 />}
+          initialExposure={false}
         />
 
         {/* <PathChip
