@@ -9,7 +9,7 @@ const PathChip = ({ size, color, bgColor, leftIcon, text,style }) => {
 
   return (
     <StyledPathChip
-    style={style}
+      style={style}
       color={color}
       bgColor={bgColor}
       size={size}
@@ -37,8 +37,6 @@ const StyledPathChip = styled.div`
     size === "tiny" ? Header10 : size === "medium" ? Header12 : ""}
   ${({ color }) => color}
     ${({ bgColor }) => bgColor}
-
-    
 
     .icon {
     width: 14px;

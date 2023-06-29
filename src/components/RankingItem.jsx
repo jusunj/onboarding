@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, {css} from "styled-components";
 import { Header24, Header20, Body14, Body12,  } from "../styles/typography";
 import PathChip from './PathChip';
@@ -61,13 +61,20 @@ const RankingItem = ({
   isTied,         // 공동 여부 >>> true | false
   nickname,       // 사용자 닉네임
   questionCount,  // 맞춘 문제 수 >>> 99998
+  isMobile,       // 모바일 여부
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [pathChipSize, setPathChipSize] = useState('medium');
+  
+  useEffect(()=>{
+    if (isMobile) {
+      setPathChipSize('tiny');
+    }
+    else {
+      setPathChipSize('medium');
+    }
+  });
 
-  if (document.documentElement.clientWidth < 791) {
-    setIsMobile(true);
-  }
-
+  if (questionCount > 9_999_999) { questionCount = 9_999_999; }
   const questionCountString = questionCount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
   return (
@@ -87,7 +94,7 @@ const RankingItem = ({
             style={{position: "absolute", top: "0px", left: "0px"}} 
             bgColor={{background: "#E8F8F0"}}
             color={{color: "#15BD66"}}
-            size={document.documentElement.clientWidth < 791 ? "tiny" : "medium"}
+            size={pathChipSize}
             text={rankingText(ranking, isTied)}
           />
         }
@@ -109,23 +116,6 @@ const StyledRankingItem = styled.div`
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  
-  ${(props)=>{
-    (!(props.isMobile)) &&
-    css`
-    align-items: flex-start;
-    gap: 4px;
-    `
-  }}
-  
-  ${(props)=>{
-    (props.isMobile) &&
-    css`
-    align-items: center;
-    gap: 10px;
-    overflow: scroll
-    `
-  }}
   
   .ranking-image {
     background-color: ${(props)=>rankingBackground(props.ranking)};

@@ -6,28 +6,22 @@ import Tooltip from "./components/Tooltip";
 import Text_delete_14 from "./svg/Text_delete_14";
 
 import RankingFrame from "./components/RankingFrame";
-import RankingItem from "./components/RankingItem";
 
 
 function App() {
   return (
     <>
-      <div style={{ padding: "300px", width: "1200px" }}>
+      <div style={{ padding: "300px", width: "1500px" }}>
 
-        <RankingFrame />
+        <RankingFrame data={[
+          {ranking: 1, isTied: true, nickname: '알아서뭐하시게요', questionCount: 99999999999},
+          {ranking: 1, isTied: true, nickname: '라벨라벨라벨라벨링', questionCount: 999999},
+          {ranking: 2, isTied: false, nickname: '텀블러', questionCount: 99998},
+          {ranking: 3, isTied: false, nickname: '마우스는로지텍', questionCount: 9996},
+          {ranking: 4, isTied: false, nickname: '오늘점심짜장면', questionCount: 94},
+        ]} />
 
         <br /><br />
-
-        {/* <RankingFrame
-          data={'1'
-              //  {ranking: 1, isTied: true, nickname: '알아서뭐하시게요', questionCount: 99999},
-              //  {ranking: 1, isTied: true, nickname: '라벨라벨라벨라벨링', questionCount: 99999},
-              //  {ranking: 2, isTied: false, nickname: '텀블러', questionCount: 99998},
-              //  {ranking: 3, isTied: false, nickname: '마우스는로지텍', questionCount: 99996},
-              //  {ranking: 4, isTied: false, nickname: '오늘점심짜장면', questionCount: 99994},
-            }
-        /> */}
-
         <Tooltip
           direction={"south"}
           arrowLocation={2}
