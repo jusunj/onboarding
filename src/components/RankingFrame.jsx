@@ -57,41 +57,38 @@ const StyledRankingFrame = styled.div`
   text-align: center;
   width: 100%;
 
-    
-  ${(props)=>{
-    (!(props.isMobile)) &&
-    css`
-    align-items: flex-start;
-    gap: 4px;
-    // width: 1200px;
-    `
-  }}
+  align-items: flex-start;
+  gap: 4px;
   
-  ${(props)=>{
-    (props.isMobile) &&
-    css`
-    align-items: center;
+  @media (max-width: 791px) {
+    align-items: cneter;
     gap: 10px;
     overflow-x: auto;
-    // width: 680px;
-    `
-  }}
+  }
   
   .ranking-title {
-    padding-bottom: ${(props) => (props.isMobile) ? '6px' : '10px'};
-    ${(props) => (props.isMobile) ? Header20 : Header24};
+    padding-bottom: 10px; 
+    ${Header24}
+
+    @media (max-width: 791px) {
+      padding-bottom: 6px;
+      ${Header20}
+    }
   }
   
   .center {
-    // margin: auto;
     width: 50%;
     padding: 10px;
   }
   
   .ranking-header {
-    text-align: ${(props) => (props.isMobile) ? 'left' : 'center'};
+    text-align: center;
     margin-top: 16px;
     margin-bottom: 16px;
+
+    @media (max-width: 791px) {
+      text-align: left;
+    }
   }
 
   .ranking-subtitle {

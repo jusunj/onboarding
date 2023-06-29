@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled, {css} from "styled-components";
-import { Header24, Header20, Body14, Body12,  } from "../styles/typography";
+import { Header24, Header20, Header16, Body14, Body12 } from "../styles/typography";
 import PathChip from './PathChip';
-// import { Header16 } from "../styles/typography";
-
-export const Header16 = css`
-  font-size: 16;
-  font-family: "Pretendard Bold";
-  line-height: 23px;
-  font-weight: 700px;
-  font-style: normal;
-`;
+import {  } from "../styles/typography";
 
 const rankingBackground = (options) => {
   switch (options) {
@@ -128,16 +120,28 @@ const StyledRankingItem = styled.div`
   .ranking-image {
     background-color: ${(props)=>rankingBackground(props.ranking)};
     border-radius: 50%;
-    width: ${(props)=>(props.isMobile) ? '120px': '140px'};
-    height: ${(props)=>(props.isMobile) ? '120px': '140px'};
-    margin-left: ${(props)=>(props.isMobile) ? '10px': '30px'};
-    margin-right: ${(props)=>(props.isMobile) ? '10px': '30px'};
+    width: 140px;
+    height: 140px;
+    margin-left: 30px;
+    margin-right: 30px;
+
+    @media (max-width: 791px) {
+      width: 120px;
+      height: 120px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
 
     .ranking-image-icon {
-      width: ${(props)=>(props.isMobile) ? '60px' : '70px'};
-      height: ${(props)=>(props.isMobile) ? '60px' : '70px'};
       position: relative;
       top: 25%;
+      width: 70px;
+      height: 70px;
+
+      @media (max-width: 791px) {
+        width: 60px;
+        height: 60px;
+      }
     }
   }
 
@@ -147,18 +151,17 @@ const StyledRankingItem = styled.div`
   }
 
   .ranking-nickname {
-    ${((props)=>{
-      if (props.isMobile) {
-        return Header16;
-      }
-      else {
-        return Header20;
-      }
-    })}
+    ${Header24};
+    @media (max-width: 791px) {
+      ${Header16};
+    }
   }
 
   .ranking-question-count {
-    ${(props)=>((props.isMobile) ? Body12 : Body14)}
+    ${Body14};
+    @media (max-width: 791px) {
+      ${Body12};
+    }
   }
 `;
   
