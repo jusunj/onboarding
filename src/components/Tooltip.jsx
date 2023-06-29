@@ -19,15 +19,16 @@ const Tooltip = ({
   const [heightOfTarget, setHeightOfTarget] = useState(0);
   const [widthOfTarget, setWidthOfTarget] = useState(0);
   const [isVisible, setIsVisible] = useState(initialExposure);
-  const [removeClickEventHandler, setRemoveClickEventHandler] = useState(false);
 
   const clickEventHandler = (event)=>{
     setIsVisible(false);
-    setRemoveClickEventHandler(true);
     document.removeEventListener('click', clickEventHandler);
   };
 
   useEffect(()=>{
+    // [TEST] : 사용자 화면 너비 출력
+    // console.log(document.documentElement.clientWidth);
+
     let tooltipWidth = 0, tooltipHeight = 0, targetWidth = 0, targetHeight = 0;
     tooltipWidth = document.getElementById('tooltip-core')?.offsetWidth ;
     tooltipHeight = document.getElementById('tooltip-core')?.offsetHeight;
@@ -51,7 +52,6 @@ const Tooltip = ({
     else {
       setHeightOfTooltip('none');
     }
-
     
     setHeightOfTarget(targetHeight);
     setWidthOfTarget(targetWidth);
