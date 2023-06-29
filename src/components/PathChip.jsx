@@ -4,11 +4,12 @@ import { Header10, Header12 } from "../styles/typography";
 
 //예시 컴포넌트
 
-const PathChip = ({ size, color, bgColor, leftIcon, text }) => {
+const PathChip = ({ size, color, bgColor, leftIcon, text,style }) => {
   // size : tiny, medium
 
   return (
     <StyledPathChip
+    style={style}
       color={color}
       bgColor={bgColor}
       size={size}

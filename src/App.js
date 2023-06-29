@@ -23,16 +23,17 @@ function App() {
           target={<button id="target">TOOL<br/>4213 </button>} // target 은 id='target' 을 속성으로 가져야 합니다.
           gap={10}
           move={0}
-          icon={<Text_delete_14 />}
-          initialExposure={false}
+          // icon={<Text_delete_14 />}
+          initialExposure={true}
         />
-
-        {/* <PathChip
+        
+        <PathChip
+          style={{posiiton: "absolute"}}
           bgColor={{ background: "pink" }}
           color={{ color: "red" }}
-          size="tiny"
+          // size={browserWidth > 791 ? "medium" : "tiny"}
           text="라벨"
-        /> */}
+        />
       </div>
     </>
   );
