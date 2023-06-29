@@ -29,7 +29,7 @@ const RankingFrame = ({data}) => {
 
   return (
     <StyledRankingFrame isMobile={isMobile}>
-      <div className='ranking-header center'>
+      <div className='ranking-header'>
         <div className='ranking-title'>
           최저가 퀴즈 명예의 전당
         </div>
@@ -49,16 +49,17 @@ const RankingFrame = ({data}) => {
 };
 
 const StyledRankingFrame = styled.div`
-  text-align: center;
   width: 100%;
-
-  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  
+  // align-items: flex-start;
   gap: 4px;
   
   @media (max-width: 791px) {
     align-items: cneter;
     gap: 10px;
-    overflow-x: auto;
+    overflow: auto;
   }
   
   .ranking-title {
@@ -68,12 +69,8 @@ const StyledRankingFrame = styled.div`
     @media (max-width: 791px) {
       padding-bottom: 6px;
       ${Header20}
+      overflow: auto;
     }
-  }
-  
-  .center {
-    width: 50%;
-    padding: 10px;
   }
   
   .ranking-header {
@@ -82,17 +79,29 @@ const StyledRankingFrame = styled.div`
     margin-bottom: 16px;
 
     @media (max-width: 791px) {
-      text-align: left;
+      float: left;
+      overflow: auto;
     }
   }
 
   .ranking-subtitle {
     color: grey;
     ${Body14}
+
+    @media (max-width: 791px) {
+      float: left;
+      overflow: auto;
+    }
   }
 
   .ranking-content {
     margin-top: 20px;
+    white-space: nowrap;
+
+    @media (max-width: 791px) {
+      float: left;
+      overflow: auto;
+    }
   }
 `;
 
