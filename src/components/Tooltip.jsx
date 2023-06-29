@@ -19,6 +19,13 @@ const Tooltip = ({
   const [heightOfTarget, setHeightOfTarget] = useState(0);
   const [widthOfTarget, setWidthOfTarget] = useState(0);
   const [isVisible, setIsVisible] = useState(initialExposure);
+  const [removeClickEventHandler, setRemoveClickEventHandler] = useState(false);
+
+  const clickEventHandler = (event)=>{
+    setIsVisible(false);
+    setRemoveClickEventHandler(true);
+    document.removeEventListener('click', clickEventHandler);
+  };
 
   useEffect(()=>{
     let tooltipWidth = 0, tooltipHeight = 0, targetWidth = 0, targetHeight = 0;
@@ -28,9 +35,7 @@ const Tooltip = ({
     targetHeight = document.getElementById('target')?.offsetHeight;
     
     if (!icon) {
-      document.addEventListener('click', (event)=>{
-        setIsVisible(false);
-      });
+      document.addEventListener('click', clickEventHandler);
     }
     
     if (direction == 'north' || direction == 'south') {
