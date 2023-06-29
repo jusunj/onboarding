@@ -50,6 +50,10 @@ const StyledRankingFrame = styled.div`
     color: grey;
     ${Body14}
   }
+
+  .ranking-content {
+    margin-top: 20px;
+  }
 `;
 
 export default RankingFrame;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, {css} from "styled-components";
 import { Header24, Header20, Body14, Body12,  } from "../styles/typography";
+import PathChip from './PathChip';
 // import { Header16 } from "../styles/typography";
 
 const rankingBackground = (options) => {
@@ -42,6 +43,19 @@ const rankingIconsMobile = (options) => {
   }
 };
 
+const rankingText = (options, isTied) => {
+  switch (options) {
+    case `first`:
+      return `${(isTied)?'공동':''} 1등`;
+    case `second`:
+      return `${(isTied)?'공동':''} 2등`;
+    case `third`:
+      return `${(isTied)?'공동':''} 3등`;
+    default:
+      return ;
+  }
+};
+
 const RankingItem = ({
   ranking,        // 등수 >>> first | second | third | others
   isTied,         // 공동 여부 >>> true | false
@@ -54,25 +68,38 @@ const RankingItem = ({
     setIsMobile(true);
   }
 
+  const questionCountString = questionCount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
   return (
     <StyledRankingItem
       ranking={ranking}
       isTied={isTied}
       nickname={nickname}
-      questionCount={questionCount}
+      questionCountString={questionCountString}
       isMobile={isMobile}
     >
-      <div className="ranking-image center">
+      <div className="ranking-image" style={{position: "relative"}}>
+        {((ranking) === 'first'
+        || (ranking) === 'second'
+        || (ranking) === 'third') &&
+          <PathChip
+            className="show-chip"
+            style={{position: "absolute", top: "0px", left: "0px"}} 
+            bgColor={{background: "#E8F8F0"}}
+            color={{color: "#15BD66"}}
+            size={document.documentElement.clientWidth < 791 ? "tiny" : "medium"}
+            text={rankingText(ranking, isTied)}
+          />
+        }
         <img
           className="ranking-image-icon"
           src={(isMobile) ? rankingIconsMobile(ranking) : rankingIconsWeb(ranking)}
           alt='rankingIcon'
-          
         />
       </div>
       <div className='ranking-content'>
         <div className='ranking-nickname'>{nickname}</div>
-        <div className='ranking-question-count'>{questionCount} 문제 맞춤</div>
+        <div className='ranking-question-count'>{questionCountString} 문제 맞춤</div>
       </div>
     </StyledRankingItem>
   );
@@ -96,6 +123,7 @@ const StyledRankingItem = styled.div`
     css`
     align-items: center;
     gap: 10px;
+    overflow: scroll
     `
   }}
   

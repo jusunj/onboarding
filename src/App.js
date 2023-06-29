@@ -12,7 +12,7 @@ import RankingItem from "./components/RankingItem";
 function App() {
   return (
     <>
-      <div style={{ padding: "600px" }}>
+      <div style={{ padding: "300px", width: "1200px" }}>
 
         <RankingFrame />
 
