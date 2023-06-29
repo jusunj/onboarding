@@ -41,7 +41,7 @@ export const Header12 = css`
 `;
 
 export const Header16 = css`
-  font-size: 16;
+  font-size: 16px;
   font-family: "Pretendard Bold";
   line-height: 23px;
   font-weight: 700px;

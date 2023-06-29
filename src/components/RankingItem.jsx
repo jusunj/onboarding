@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled, {css} from "styled-components";
 import { Header24, Header20, Header16, Body14, Body12 } from "../styles/typography";
 import PathChip from './PathChip';
-import {  } from "../styles/typography";
 
 const rankingBackground = (options) => {
   switch (options) {

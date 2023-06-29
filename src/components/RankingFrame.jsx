@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from "styled-components";
-import { Header24, Header20, Body14, Body12 } from "../styles/typography";
-// import { Header16 } from "../styles/typography";
+import { Header24, Header20, Header16, Body14, Body12 } from "../styles/typography";
 import RankingItem from './RankingItem';
 
 const RankingFrame = ({data}) => {
@@ -9,14 +8,10 @@ const RankingFrame = ({data}) => {
   
   const convertRankingNumToString = (options) => {
     switch(options) {
-      case 1:
-        return 'first';
-      case 2:
-        return 'second';
-      case 3:
-        return 'third';
-      default:
-        return 'others';
+      case 1: return 'first';
+      case 2: return 'second';
+      case 3: return 'third';
+      default: return 'others';
     }
   };
 
