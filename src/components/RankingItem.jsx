@@ -4,6 +4,14 @@ import { Header24, Header20, Body14, Body12,  } from "../styles/typography";
 import PathChip from './PathChip';
 // import { Header16 } from "../styles/typography";
 
+export const Header16 = css`
+  font-size: 16;
+  font-family: "Pretendard Bold";
+  line-height: 23px;
+  font-weight: 700px;
+  font-style: normal;
+`;
+
 const rankingBackground = (options) => {
   switch (options) {
     case 'first':
@@ -138,12 +146,20 @@ const StyledRankingItem = styled.div`
     margin-bottom: 16px;
   }
 
+
   .ranking-nickname {
-    ${Header20}
+    ${((props)=>{
+      if (props.isMobile) {
+        return Header16;
+      }
+      else {
+        return Header20;
+      }
+    })}
   }
 
   .ranking-question-count {
-    ${Body14}
+    ${(props)=>((props.isMobile) ? Body12 : Body14)}
   }
 `;
   

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from "styled-components";
 import { Header24, Header20, Body14, Body12 } from "../styles/typography";
 // import { Header16 } from "../styles/typography";
 import RankingItem from './RankingItem';
 
 const RankingFrame = ({data}) => {
+  const [isMobile, setIsMobile] = useState(false);
+  
   const convertRankingNumToString = (options) => {
     switch(options) {
       case 1:
@@ -17,17 +19,11 @@ const RankingFrame = ({data}) => {
         return 'others';
     }
   };
-
-  const [isMobile, setIsMobile] = useState(false);
-
+  
   useEffect(()=>{
-    if (document.documentElement.clientWidth < 791) {
-      setIsMobile(true);
-    }
-    else {
-      setIsMobile(false);
-    }
-  }, []);
+    if (document.documentElement.clientWidth < 791) setIsMobile(true);
+    else setIsMobile(false);
+  }, [isMobile]);
 
   return (
     <StyledRankingFrame isMobile={isMobile}>
