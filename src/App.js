@@ -10,8 +10,8 @@ import RankingFrame from "./components/RankingFrame";
 
 function App() {
   return (
-    <>
-      <div style={{ padding: "300px", width: "1200px" }}>
+    <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+      <div style={{  width: "1200px",background:"red" }}>
 
         <RankingFrame data={[
           {ranking: 1, isTied: true, nickname: '알아서뭐하시게요', questionCount: 99999999999},
@@ -49,7 +49,7 @@ function App() {
           text="라벨"
         />
       </div>
-    </>
+      </div>
   );
 }
 

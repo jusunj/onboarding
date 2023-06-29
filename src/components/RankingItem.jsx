@@ -146,7 +146,6 @@ const StyledRankingItem = styled.div`
     margin-bottom: 16px;
   }
 
-
   .ranking-nickname {
     ${((props)=>{
       if (props.isMobile) {

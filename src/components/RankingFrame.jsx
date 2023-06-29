@@ -19,6 +19,13 @@ const RankingFrame = ({data}) => {
         return 'others';
     }
   };
+
+  const handleResize = () => {
+    if (document.documentElement.clientWidth < 791) setIsMobile(true);
+    else setIsMobile(false);
+  };
+
+  window.addEventListener('resize', handleResize);
   
   useEffect(()=>{
     if (document.documentElement.clientWidth < 791) setIsMobile(true);
@@ -67,21 +74,16 @@ const StyledRankingFrame = styled.div`
     gap: 10px;
     overflow-x: auto;
     // width: 680px;
-    
-    .ranking-title {
-      padding-bottom: 10px;
-      ${Header20}
-    }
     `
   }}
   
   .ranking-title {
     padding-bottom: ${(props) => (props.isMobile) ? '6px' : '10px'};
-    ${(props) => (props.isMobile) ? Header20 : Header24}
+    ${(props) => (props.isMobile) ? Header20 : Header24};
   }
   
   .center {
-    margin: auto;
+    // margin: auto;
     width: 50%;
     padding: 10px;
   }
