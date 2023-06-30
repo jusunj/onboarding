@@ -9,19 +9,24 @@ import RankingFrame from "./components/RankingFrame";
 function App() {
   return (
     <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
-      <div style={{  width: "1200px",background:"#D9D9D9" }}>
-
-        <RankingFrame data={[
-          {ranking: '공동 1등', nickname: '알아서뭐하시게요', questionCount: 99999999999},
-          {ranking: '공동 1등', nickname: '라벨라벨라벨라벨링', questionCount: 999999},
-          {ranking: '2등', nickname: '텀블러', questionCount: 99998},
-          {ranking: '3등', nickname: '마우스는로지텍', questionCount: 9996},
-          {ranking: '', nickname: '오늘점심짜장면', questionCount: 94},
-        ]} />
+      <div style={{  width: "1200px", height: "300px", background:"#D9D9"}}>
 
         {
           false &&
           <div>
+            <RankingFrame data={[
+              {ranking: '공동 1등', nickname: '알아서뭐하시게요', questionCount: 99999999999},
+              {ranking: '공동 1등', nickname: '라벨라벨라벨라벨링', questionCount: 999999},
+              {ranking: '2등', nickname: '텀블러', questionCount: 99998},
+              {ranking: '3등', nickname: '마우스는로지텍', questionCount: 9996},
+              {ranking: '', nickname: '오늘점심짜장면', questionCount: 94},
+            ]} />
+          </div>
+        }
+
+        {
+          true &&
+          <div style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop: '120px'}}>
 
           <br /><br />
           <Tooltip
@@ -29,17 +34,15 @@ function App() {
             arrowLocation={2}
             text={
               <div>
-                이런 식의 사용이 가능합니다
-                <br/>
-                ---
+                이런 식의 사용이 가능합니다.
                 <br/>
                 개행도 가능합니다.
               </div>
             }
-            target={<button id="target">TOOL<br/>4213 </button>} // target 은 id='target' 을 속성으로 가져야 합니다.
+            target={<button id="target">TOOL<br/>TIP </button>} // target 은 id='target' 을 속성으로 가져야 합니다.
             gap={10}
             move={0}
-            icon={<Text_delete_14 />}
+            // icon={<Text_delete_14 />}
             initialExposure={true}
           />
 
