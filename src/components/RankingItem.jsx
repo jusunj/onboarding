@@ -115,6 +115,7 @@ const StyledRankingItem = styled.div`
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   
   .ranking-image {
     background-color: ${(props)=>rankingBackground(props.ranking)};
@@ -150,8 +151,13 @@ const StyledRankingItem = styled.div`
   }
 
   .ranking-nickname {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 168px;
     ${Header24};
     @media (max-width: 791px) {
+      width: 120px;
       ${Header16};
     }
   }
