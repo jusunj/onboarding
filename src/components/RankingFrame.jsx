@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import { Header24, Header20, Body14 } from "../styles/typography";
 import RankingItem from './RankingItem';
@@ -20,6 +20,25 @@ const RankingFrame = ({data}) => {
     else setIsMobile(false);
   }, [isMobile]);
   */
+  const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
+
+  const resizeTimer = useRef(null);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      if (resizeTimer.current !== null) return;
+      resizeTimer.current = setTimeout(() => {
+        resizeTimer.current = null;
+        setBrowserWidth(window.innerWidth);
+      }, 200);
+    };
+  
+    window.addEventListener("resize", handleResize);
+  
+    return () => {
+      window.addEventListener("resize", handleResize);
+    };
+  }, [browserWidth]);
 
   return (
     <StyledRankingFrame>
@@ -31,12 +50,12 @@ const RankingFrame = ({data}) => {
           가입 회원님들의 퀴즈 랭킹!
         </div>
       </div>
-      <div className='ranking-content'>
-        <RankingItem ranking={data[0].ranking} nickname={data[0].nickname} questionCount={data[0].questionCount} />
-        <RankingItem ranking={data[1].ranking} nickname={data[1].nickname} questionCount={data[1].questionCount} />
-        <RankingItem ranking={data[2].ranking} nickname={data[2].nickname} questionCount={data[2].questionCount} />
-        <RankingItem ranking={data[3].ranking} nickname={data[3].nickname} questionCount={data[3].questionCount } />
-        <RankingItem ranking={data[4].ranking} nickname={data[4].nickname} questionCount={data[4].questionCount} />
+      <div className='ranking-content' style={browserWidth > 791 ? { } : {width: `${browserWidth}px`, overflowX: 'scroll'}}>
+        <RankingItem ranking={data[0].ranking} nickname={data[0].nickname} questionCount={data[0].questionCount} browserWidth={browserWidth} />
+        <RankingItem ranking={data[1].ranking} nickname={data[1].nickname} questionCount={data[1].questionCount} browserWidth={browserWidth} />
+        <RankingItem ranking={data[2].ranking} nickname={data[2].nickname} questionCount={data[2].questionCount} browserWidth={browserWidth} />
+        <RankingItem ranking={data[3].ranking} nickname={data[3].nickname} questionCount={data[3].questionCount } browserWidth={browserWidth} />
+        <RankingItem ranking={data[4].ranking} nickname={data[4].nickname} questionCount={data[4].questionCount} browserWidth={browserWidth} />
       </div>
     </StyledRankingFrame>
   );

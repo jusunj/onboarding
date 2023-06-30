@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, {css} from "styled-components";
 import { Header24, Header20, Header16, Body14, Body12 } from "../styles/typography";
 import PathChip from './PathChip';
@@ -46,27 +46,9 @@ const RankingItem = ({
   ranking,        // 등수 >>> '공동 1등' | '2등' | '3등' | ''
   nickname,       // 사용자 닉네임
   questionCount,  // 맞춘 문제 수 >>> 99998
+  browserWidth
 }) => {
-  const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
   const [pathChipSize, setPathChipSize] = useState('medium');
-
-  const resizeTimer = useRef(null);
-  
-  useEffect(() => {
-    const handleResize = () => {
-      if (resizeTimer.current !== null) return;
-      resizeTimer.current = setTimeout(() => {
-        resizeTimer.current = null;
-        setBrowserWidth(window.innerWidth);
-      }, 200);
-    };
-  
-    window.addEventListener("resize", handleResize);
-  
-    return () => {
-      window.addEventListener("resize", handleResize);
-    };
-  }, [browserWidth]);
   
   useEffect(
     ()=>{ (browserWidth < 791) ? setPathChipSize('tiny') : setPathChipSize('medium') }
