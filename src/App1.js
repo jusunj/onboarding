@@ -10,6 +10,7 @@ function App() {
   return (
     <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
       <div style={{  width: "1200px", height: "300px", background:"#D9D9"}}>
+        App1
 
         {
           false &&
@@ -25,7 +26,7 @@ function App() {
         }
 
         {
-          true &&
+          false &&
           <div style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop: '120px'}}>
 
           <br /><br />
@@ -64,7 +65,7 @@ function App() {
           </div>
         }
       </div>
-      </div>
+    </div>
   );
 }
 
