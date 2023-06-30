@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, {css} from "styled-components";
 import { Header24, Header20, Header16, Body14, Body12 } from "../styles/typography";
 import PathChip from './PathChip';
 
 const rankingBackground = (options) => {
-  switch (options) {
-    case 'first':
+  switch (options.replaceAll(/[^0-9]/g, "")) {
+    case '1':
       return '#EEE5FF';
-    case 'second':
+    case '2':
       return '#ECF1FD';
-    case 'third':
+    case '3':
       return '#FFEBED';
     default:
       return '#F8F8F8';
@@ -17,12 +17,12 @@ const rankingBackground = (options) => {
 };
 
 const rankingIconsWeb = (options) => {
-  switch (options) {
-    case 'first':
+  switch (options.replaceAll(/[^0-9]/g, "")) {
+    case '1':
       return 'rankingIcons/Whale_Web.png';
-    case 'second':
+    case '2':
       return 'rankingIcons/Seal_Web.png';
-    case 'third':
+    case '3':
       return 'rankingIcons/Octopus_Web.png';
     default:
       return 'rankingIcons/Fish_Web.png';
@@ -30,48 +30,47 @@ const rankingIconsWeb = (options) => {
 };
 
 const rankingIconsMobile = (options) => {
-  switch (options) {
-    case 'first':
+  switch (options.replaceAll(/[^0-9]/g, "")) {
+    case '1':
       return 'rankingIcons/Whale_Mobile.png';
-    case 'second':
+    case '2':
       return 'rankingIcons/Seal_Mobile.png';
-    case 'third':
+    case '3':
       return 'rankingIcons/Octopus_Mobile.png';
     default:
       return 'rankingIcons/Fish_Mobile.png';
   }
 };
 
-const rankingText = (options, isTied) => {
-  switch (options) {
-    case `first`:
-      return `${(isTied)?'공동':''} 1등`;
-    case `second`:
-      return `${(isTied)?'공동':''} 2등`;
-    case `third`:
-      return `${(isTied)?'공동':''} 3등`;
-    default:
-      return ;
-  }
-};
-
 const RankingItem = ({
-  ranking,        // 등수 >>> first | second | third | others
-  isTied,         // 공동 여부 >>> true | false
+  ranking,        // 등수 >>> '공동 1등' | '2등' | '3등' | ''
   nickname,       // 사용자 닉네임
   questionCount,  // 맞춘 문제 수 >>> 99998
-  isMobile,       // 모바일 여부
 }) => {
+  const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
   const [pathChipSize, setPathChipSize] = useState('medium');
+
+  const resizeTimer = useRef(null);
   
-  useEffect(()=>{
-    if (isMobile) {
-      setPathChipSize('tiny');
-    }
-    else {
-      setPathChipSize('medium');
-    }
-  });
+  useEffect(() => {
+    const handleResize = () => {
+      if (resizeTimer.current !== null) return;
+      resizeTimer.current = setTimeout(() => {
+        resizeTimer.current = null;
+        setBrowserWidth(window.innerWidth);
+      }, 200);
+    };
+  
+    window.addEventListener("resize", handleResize);
+  
+    return () => {
+      window.addEventListener("resize", handleResize);
+    };
+  }, [browserWidth]);
+  
+  useEffect(
+    ()=>{ (browserWidth < 791) ? setPathChipSize('tiny') : setPathChipSize('medium') }
+  , [browserWidth]);
 
   if (questionCount > 9_999_999) { questionCount = 9_999_999; }
   const questionCountString = questionCount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -79,27 +78,26 @@ const RankingItem = ({
   return (
     <StyledRankingItem
       ranking={ranking}
-      isTied={isTied}
       nickname={nickname}
       questionCountString={questionCountString}
-      isMobile={isMobile}
+      browserWidth={browserWidth}
     >
       <div className="ranking-image" style={{position: "relative"}}>
-        {((ranking) === 'first'
-        || (ranking) === 'second'
-        || (ranking) === 'third') &&
+        {((ranking.replaceAll(/[^0-9]/g, "")) === '1'
+        || (ranking.replaceAll(/[^0-9]/g, "")) === '2'
+        || (ranking.replaceAll(/[^0-9]/g, "")) === '3') &&
           <PathChip
             className="show-chip"
             style={{position: "absolute", top: "0px", left: "0px"}} 
             bgColor={{background: "#E8F8F0"}}
             color={{color: "#15BD66"}}
             size={pathChipSize}
-            text={rankingText(ranking, isTied)}
+            text={ranking}
           />
         }
         <img
           className="ranking-image-icon"
-          src={(isMobile) ? rankingIconsMobile(ranking) : rankingIconsWeb(ranking)}
+          src={(browserWidth < 791) ? rankingIconsMobile(ranking) : rankingIconsWeb(ranking)}
           alt='rankingIcon'
         />
       </div>

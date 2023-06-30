@@ -1,34 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
-import styled, { css } from "styled-components";
-import { Header24, Header20, Header16, Body14, Body12 } from "../styles/typography";
+import React from 'react';
+import styled from "styled-components";
+import { Header24, Header20, Body14 } from "../styles/typography";
 import RankingItem from './RankingItem';
 
 const RankingFrame = ({data}) => {
+  
+  /*  isMobile을 useWidth로 대체>>>
   const [isMobile, setIsMobile] = useState(false);
   
-  const convertRankingNumToString = (options) => {
-    switch(options) {
-      case 1: return 'first';
-      case 2: return 'second';
-      case 3: return 'third';
-      default: return 'others';
-    }
-  };
-
   const handleResize = () => {
     if (document.documentElement.clientWidth < 791) setIsMobile(true);
     else setIsMobile(false);
   };
-
+  
   window.addEventListener('resize', handleResize);
   
   useEffect(()=>{
     if (document.documentElement.clientWidth < 791) setIsMobile(true);
     else setIsMobile(false);
   }, [isMobile]);
+  */
 
   return (
-    <StyledRankingFrame isMobile={isMobile}>
+    <StyledRankingFrame>
       <div className='ranking-header'>
         <div className='ranking-title'>
           최저가 퀴즈 명예의 전당
@@ -38,11 +32,11 @@ const RankingFrame = ({data}) => {
         </div>
       </div>
       <div className='ranking-content'>
-        <RankingItem ranking={convertRankingNumToString(data[0].ranking)} isTied={data[0].isTied} nickname={data[0].nickname} questionCount={data[0].questionCount} isMobile={isMobile} />
-        <RankingItem ranking={convertRankingNumToString(data[1].ranking)} isTied={data[1].isTied} nickname={data[1].nickname} questionCount={data[1].questionCount} isMobile={isMobile} />
-        <RankingItem ranking={convertRankingNumToString(data[2].ranking)} isTied={data[2].isTied} nickname={data[2].nickname} questionCount={data[2].questionCount} isMobile={isMobile} />
-        <RankingItem ranking={convertRankingNumToString(data[3].ranking)} isTied={data[3].isTied} nickname={data[3].nickname} questionCount={data[3].questionCount } isMobile={isMobile} />
-        <RankingItem ranking={convertRankingNumToString(data[4].ranking)} isTied={data[4].isTied} nickname={data[4].nickname} questionCount={data[4].questionCount} isMobile={isMobile} />
+        <RankingItem ranking={data[0].ranking} nickname={data[0].nickname} questionCount={data[0].questionCount} />
+        <RankingItem ranking={data[1].ranking} nickname={data[1].nickname} questionCount={data[1].questionCount} />
+        <RankingItem ranking={data[2].ranking} nickname={data[2].nickname} questionCount={data[2].questionCount} />
+        <RankingItem ranking={data[3].ranking} nickname={data[3].nickname} questionCount={data[3].questionCount } />
+        <RankingItem ranking={data[4].ranking} nickname={data[4].nickname} questionCount={data[4].questionCount} />
       </div>
     </StyledRankingFrame>
   );
@@ -52,12 +46,13 @@ const StyledRankingFrame = styled.div`
   width: 100%;
   justify-content: center;
   text-align: center;
+  position: relative;
   
   // align-items: flex-start;
   gap: 4px;
   
   @media (max-width: 791px) {
-    align-items: cneter;
+    align-items: center;
     gap: 10px;
     overflow: auto;
   }
@@ -93,7 +88,7 @@ const StyledRankingFrame = styled.div`
       overflow: auto;
     }
   }
-
+  
   .ranking-content {
     margin-top: 20px;
     white-space: nowrap;
@@ -101,7 +96,12 @@ const StyledRankingFrame = styled.div`
     @media (max-width: 791px) {
       float: left;
       overflow: auto;
+      left: 0px;
     }
+  }
+
+  .ranking-content::-webkit-scrollbar {
+    display: none;
   }
 `;
 

@@ -4,9 +4,7 @@ import "./App.css";
 import PathChip from "./components/PathChip";
 import Tooltip from "./components/Tooltip";
 import Text_delete_14 from "./svg/Text_delete_14";
-
 import RankingFrame from "./components/RankingFrame";
-
 
 function App() {
   return (
@@ -14,11 +12,11 @@ function App() {
       <div style={{  width: "1200px",background:"#D9D9D9" }}>
 
         <RankingFrame data={[
-          {ranking: 1, isTied: true, nickname: '알아서뭐하시게요', questionCount: 99999999999},
-          {ranking: 1, isTied: true, nickname: '라벨라벨라벨라벨링', questionCount: 999999},
-          {ranking: 2, isTied: false, nickname: '텀블러', questionCount: 99998},
-          {ranking: 3, isTied: false, nickname: '마우스는로지텍', questionCount: 9996},
-          {ranking: 4, isTied: false, nickname: '오늘점심짜장면', questionCount: 94},
+          {ranking: '공동 1등', nickname: '알아서뭐하시게요', questionCount: 99999999999},
+          {ranking: '공동 1등', nickname: '라벨라벨라벨라벨링', questionCount: 999999},
+          {ranking: '2등', nickname: '텀블러', questionCount: 99998},
+          {ranking: '3등', nickname: '마우스는로지텍', questionCount: 9996},
+          {ranking: '', nickname: '오늘점심짜장면', questionCount: 94},
         ]} />
 
         {
