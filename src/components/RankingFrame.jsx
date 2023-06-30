@@ -51,11 +51,16 @@ const RankingFrame = ({data}) => {
         </div>
       </div>
       <div className='ranking-content' style={browserWidth > 791 ? { } : {width: `${browserWidth}px`, overflowX: 'scroll'}}>
-        <RankingItem ranking={data[0].ranking} nickname={data[0].nickname} questionCount={data[0].questionCount} browserWidth={browserWidth} />
-        <RankingItem ranking={data[1].ranking} nickname={data[1].nickname} questionCount={data[1].questionCount} browserWidth={browserWidth} />
-        <RankingItem ranking={data[2].ranking} nickname={data[2].nickname} questionCount={data[2].questionCount} browserWidth={browserWidth} />
-        <RankingItem ranking={data[3].ranking} nickname={data[3].nickname} questionCount={data[3].questionCount } browserWidth={browserWidth} />
-        <RankingItem ranking={data[4].ranking} nickname={data[4].nickname} questionCount={data[4].questionCount} browserWidth={browserWidth} />
+        {
+          data.map(element=>
+            <RankingItem
+              ranking={element.ranking}
+              nickname={element.nickname}
+              questionCount={element.questionCount}
+              browserWidth={browserWidth}
+            />
+          )
+        }
       </div>
     </StyledRankingFrame>
   );
