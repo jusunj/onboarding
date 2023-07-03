@@ -13,7 +13,7 @@ function App() {
 
         <ChatInput
           hasInfoBox={false}
-          maxLength={800}
+          maxLength={100}
         />
       </div>
     </div>

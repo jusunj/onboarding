@@ -4,20 +4,23 @@ import { Body14, Body12 } from "../styles/typography";
 import ChatInput_send_button from "../svg/ChatInput_send_button";
 
 const ChatInput = ({maxLength}) => {
-  // textarea 메시지 관련 코드
+
+  // 메시지 관련 코드 : 개행 및 띄어쓰기 대응
   const [message, setMessage] = useState('');
+
   const handleMessageChange = (e)=>{
-    setMessage(e.target.innerHTML.replaceAll('<div><br></div>', '\n').replaceAll('<div>', '').replaceAll('</div>', '').toString());
-    console.log(message.length);
-    console.log(message);
+    // setMessage(e.target.innerHTML.replaceAll('</div>', '').replaceAll('<div><br>', '\n').replaceAll('<div>', '\n').replaceAll('&nbsp', ' '));
+    setMessage(e.target.innerText);
+    // console.log(message, '>>>', message.length);
   };
-  
+
   // 버튼 활성화 관련 코드
   const [buttonActivate, setButtonActivate] = useState(false);
   useEffect(() => {
-    if (message.length > 0) setButtonActivate(true);
+    if (message.length > maxLength) setButtonActivate(false);
+    else if (message.length > 0) setButtonActivate(true);
     else setButtonActivate(false);
-  }, [message]);
+  }, [message, buttonActivate]);
 
   // 브라우저 너비 관련 코드
   const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
@@ -35,7 +38,10 @@ const ChatInput = ({maxLength}) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [browserWidth]);
+  }, [browserWidth, message]);
+
+  // 글자 수 제한
+  
 
   return (
     <StyledChatInput browserWidth={browserWidth} maxLength={maxLength}>
