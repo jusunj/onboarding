@@ -12,9 +12,8 @@ function App() {
         App2
 
         <ChatInput
-          message={message}
-          messageMethod={setMessage}
           hasInfoBox={false}
+          maxLength={800}
         />
       </div>
     </div>

@@ -3,11 +3,13 @@ import styled from "styled-components";
 import { Body14, Body12 } from "../styles/typography";
 import ChatInput_send_button from "../svg/ChatInput_send_button";
 
-const ChatInput = () => {
+const ChatInput = ({maxLength}) => {
   // textarea 메시지 관련 코드
   const [message, setMessage] = useState('');
   const handleMessageChange = (e)=>{
-    setMessage(e.target.innerHTML);
+    setMessage(e.target.innerHTML.replaceAll('<div><br></div>', '\n').replaceAll('<div>', '').replaceAll('</div>', '').toString());
+    console.log(message.length);
+    console.log(message);
   };
   
   // 버튼 활성화 관련 코드
@@ -36,7 +38,7 @@ const ChatInput = () => {
   }, [browserWidth]);
 
   return (
-    <StyledChatInput browserWidth={browserWidth}>
+    <StyledChatInput browserWidth={browserWidth} maxLength={maxLength}>
       <div className="chat-input-wrapper">
         <div className="chat-input">
 
