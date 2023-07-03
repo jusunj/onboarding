@@ -10,6 +10,7 @@ const ChatInput = ({maxLength}) => {
   const [message, setMessage] = useState('');
   const [buttonActivate, setButtonActivate] = useState(false);
   const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
+  const [dontSummarizeInput, setDontSummarizeInput] = useState(true);
   
   const handleMessageChange = (e)=>{
     // 글자 수 제한
@@ -47,6 +48,25 @@ const ChatInput = ({maxLength}) => {
       window.removeEventListener("resize", handleResize);
     };
   }, [browserWidth, message]);
+
+  // 다른 영역 클릭 시 줄이기
+  useEffect(()=>{
+    document.addEventListener('click', (e)=>{
+      if (e.target.id !== 'chat-input-text') {
+        setDontSummarizeInput(false);
+      }
+      else {
+        setDontSummarizeInput(true);
+      }
+    });
+
+    if (!dontSummarizeInput) {
+      // 다른 영역을 클릭했을 때, 할 행동을 개발
+    }
+    else {
+      // 채팅 폼을 클릭했을 때, 할 행동을 개발
+    }
+  }, [dontSummarizeInput]);
 
   return (
     <StyledChatInput browserWidth={browserWidth} maxLength={maxLength}>
