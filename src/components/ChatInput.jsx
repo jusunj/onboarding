@@ -93,8 +93,14 @@ const StyledChatInput = styled.div`
       margin-right: 10px;
       padding: 8px 12px;
       min-height: 14px;
+      max-height: 76px;
+      overflow-y: scroll;
       outline: 0px solid transparent;
       ${ Body14 }
+    }
+
+    .chat-input-text::-webkit-scrollbar {
+      display: none;
     }
   }
 
