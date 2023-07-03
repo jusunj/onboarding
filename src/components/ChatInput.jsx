@@ -4,27 +4,35 @@ import { Body14, Body12 } from "../styles/typography";
 import ChatInput_send_button from "../svg/ChatInput_send_button";
 
 const ChatInput = ({maxLength}) => {
-
-  // 메시지 관련 코드 : 개행 및 띄어쓰기 대응
+  
+  const editableRef = useRef(null);
+  const resizeTimer = useRef(null);
   const [message, setMessage] = useState('');
-
+  const [buttonActivate, setButtonActivate] = useState(false);
+  const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
+  
   const handleMessageChange = (e)=>{
+    // 글자 수 제한
+    const maxCharacters = maxLength;
+    const text = editableRef.current.innerText;
+    if (text.length > maxCharacters) {
+      editableRef.current.innerText = text.slice(0, maxCharacters);
+    }
+    
+    // 메시지 관련 코드 : 개행 및 띄어쓰기 대응
     // setMessage(e.target.innerHTML.replaceAll('</div>', '').replaceAll('<div><br>', '\n').replaceAll('<div>', '\n').replaceAll('&nbsp', ' '));
     setMessage(e.target.innerText);
     // console.log(message, '>>>', message.length);
   };
 
   // 버튼 활성화 관련 코드
-  const [buttonActivate, setButtonActivate] = useState(false);
   useEffect(() => {
-    if (message.length > maxLength) setButtonActivate(false);
+    if (message.length >= maxLength) setButtonActivate(false);
     else if (message.length > 0) setButtonActivate(true);
     else setButtonActivate(false);
   }, [message, buttonActivate]);
 
   // 브라우저 너비 관련 코드
-  const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
-  const resizeTimer = useRef(null);
   useEffect(() => {
     const handleResize = () => {
       if (resizeTimer.current !== null) return;
@@ -40,9 +48,6 @@ const ChatInput = ({maxLength}) => {
     };
   }, [browserWidth, message]);
 
-  // 글자 수 제한
-  
-
   return (
     <StyledChatInput browserWidth={browserWidth} maxLength={maxLength}>
       <div className="chat-input-wrapper">
@@ -55,10 +60,11 @@ const ChatInput = ({maxLength}) => {
               className="chat-input-text"
               id="chat-input-text"
               value={message}
+              ref={editableRef}
               onInput={handleMessageChange}
               rows="1"
             />
-            
+
           </div>
 
           <div className="chat-input-button-wrapper">
