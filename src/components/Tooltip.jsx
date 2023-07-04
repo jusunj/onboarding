@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from "react";
-import styled, {css} from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 import { Body12 } from "../styles/typography";
 // import Text_delete_14 from "../svg/Text_delete_14";
 // import Tooltip_arrow from "../svg/Tooltip_arrow";
