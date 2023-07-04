@@ -148,7 +148,8 @@ const StyledChatInput = styled.div`
   .chat-input-wrapper {
     display: flex;
     border-top: 1px solid #EBEBEB;
-    position: absolute;
+    background-color: white;
+    position: fixed;
     bottom: 0px;
     width: ${(props)=>(props.browserWidth > 791) ? 791 : props.browserWidth}px;
     
