@@ -64,18 +64,22 @@ const ChatInput = ({maxLength}) => {
   }, [dontSummarizeInput]);
 
   // 붙여넣기 대응
-  document.addEventListener('paste', function(event) {
-    event.preventDefault();
-    let pastedText = '';
-
-    if (event.clipboardData && event.clipboardData.getData) {
-      pastedText = event.clipboardData.getData('text/plain');
-    }
-    
-    if (maxLength > (document.getElementById('chat-input-text').innerText.length + pastedText.length)) {
-      document.getElementById('chat-input-text').textContent = 
-        document.getElementById('chat-input-text').textContent + pastedText;
-    }
+  useEffect(()=>{
+    document.addEventListener('paste', function(event) {
+      // [NOT WORKING] event.stopPropagation();
+      event.preventDefault();
+  
+      let pastedText = '';
+      if (
+        event.clipboardData
+        && event.clipboardData.getData
+      ) {
+        console.log('TEST-INNER');
+        pastedText = event.clipboardData.getData('text/plain');
+        document.getElementById('chat-input-text').textContent = 
+          document.getElementById('chat-input-text').textContent + pastedText;
+      }
+    }, {once: true});
   });
 
   return (
