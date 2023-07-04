@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import { Body14, Body12 } from "../styles/typography";
 import ChatInput_send_button from "../svg/ChatInput_send_button";
 
@@ -69,7 +69,7 @@ const ChatInput = ({maxLength}) => {
   }, [dontSummarizeInput]);
 
   return (
-    <StyledChatInput browserWidth={browserWidth} maxLength={maxLength}>
+    <StyledChatInput browserWidth={browserWidth} dontSummarizeInput={dontSummarizeInput}>
       <div className="chat-input-wrapper">
         <div className="chat-input">
 
@@ -128,9 +128,24 @@ const StyledChatInput = styled.div`
       padding: 8px 12px;
       min-height: 14px;
       max-height: 76px;
-      overflow-y: scroll;
       outline: 0px solid transparent;
-      ${ Body14 }
+      ${ Body14 };
+
+      ${(props)=>
+        (props.dontSummarizeInput) &&
+        css`
+        overflow-y: scroll;
+        `
+      }
+
+      ${(props)=>
+        !(props.dontSummarizeInput) &&
+        css`
+        overflow-y: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        `
+      }
     }
 
     .chat-input-text::-webkit-scrollbar {
