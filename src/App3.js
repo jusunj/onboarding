@@ -7,7 +7,7 @@ import useInput from "./hooks/useInput";
 
 function App() {
   const { isFocused, setIsFocused, } = useInput();
-  const buttonClicked = () => {
+  const onClick = () => {
     alert('버튼이 클릭되었습니다!');
   };
   const buttonText = '라벨';
@@ -30,7 +30,7 @@ function App() {
               isFocused={isFocused}
               isDisabled={false}
               buttonText={buttonText}
-              buttonClicked={buttonClicked}
+              onClick={onClick}
             />
           </div>
         }

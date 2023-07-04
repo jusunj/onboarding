@@ -6,7 +6,7 @@ const FullWidthButton = ({
   isFocused,      // Boolean 타입
   isDisabled,     // Boolean 타입
   buttonText,     // 버튼에 표시할 내용
-  buttonClicked,  // 버튼이 클릭됐을 때 실행할 함수
+  onClick,  // 버튼이 클릭됐을 때 실행할 함수
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   
@@ -19,7 +19,7 @@ const FullWidthButton = ({
     <StyledFullWidthButton>
       {
         isVisible &&
-        <button onClick={buttonClicked} disabled={isDisabled}>
+        <button onClick={onClick} disabled={isDisabled}>
           {buttonText}
         </button>
       }
