@@ -56,7 +56,9 @@ const ChatInput = ({maxLength}) => {
         setDontSummarizeInput(false);
       }
       else {
-        setDontSummarizeInput(true);
+        if (!dontSummarizeInput) {
+          setDontSummarizeInput(true);
+        }
       }
     });
 
