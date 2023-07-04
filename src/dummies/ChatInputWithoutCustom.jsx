@@ -2,38 +2,36 @@ import React, { useState, useEffect, useRef } from "react";
 import styled, {css} from "styled-components";
 import { Body14, Body12 } from "../styles/typography";
 import ChatInput_send_button from "../svg/ChatInput_send_button";
-// import useInput from "../hooks/useInput";
 
-const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRef}) => {
-  // const { value, setValue, isFocused, setIsFocused, inputRef } = useInput();
-
-  // const editableRef = useRef(null);           // inputRef와 대응
+const ChatInput = ({maxLength}) => {
+  
+  const editableRef = useRef(null);
   const resizeTimer = useRef(null);
-  // const [message, setMessage] = useState(''); // value, setValue와 대응
+  const [message, setMessage] = useState('');
   const [buttonActivate, setButtonActivate] = useState(false);
   const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
-  // const [dontSummarizeInput, setDontSummarizeInput] = useState(true);  // isFocused와 대응
+  const [dontSummarizeInput, setDontSummarizeInput] = useState(true);
   
   const handleMessageChange = (e)=>{
     // 글자 수 제한
     const maxCharacters = maxLength;
-    const text = inputRef.current.innerText;
+    const text = editableRef.current.innerText;
     if (text.length > maxCharacters) {
-      inputRef.current.innerText = text.slice(0, maxCharacters);
+      editableRef.current.innerText = text.slice(0, maxCharacters);
     }
     
     // 메시지 관련 코드 : 개행 및 띄어쓰기 대응
-    // setValue(e.target.innerHTML.replaceAll('</div>', '').replaceAll('<div><br>', '\n').replaceAll('<div>', '\n').replaceAll('&nbsp', ' '));
-    setValue(e.target.innerText);
-    // console.log(value, '>>>', value.length);
+    // setMessage(e.target.innerHTML.replaceAll('</div>', '').replaceAll('<div><br>', '\n').replaceAll('<div>', '\n').replaceAll('&nbsp', ' '));
+    setMessage(e.target.innerText);
+    // console.log(message, '>>>', message.length);
   };
 
   // 버튼 활성화 관련 코드
   useEffect(() => {
-    if (value.length >= maxLength) setButtonActivate(false);
-    else if (value.length > 0) setButtonActivate(true);
+    if (message.length >= maxLength) setButtonActivate(false);
+    else if (message.length > 0) setButtonActivate(true);
     else setButtonActivate(false);
-  }, [value, buttonActivate]);
+  }, [message, buttonActivate]);
 
   // 브라우저 너비 관련 코드
   useEffect(() => {
@@ -49,25 +47,25 @@ const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRe
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [browserWidth, value]);
+  }, [browserWidth, message]);
 
   // 다른 영역 클릭 시 줄이기
   useEffect(()=>{
     document.addEventListener('click', (e)=>{
       if (e.target.id !== 'chat-input-text') {
-        setIsFocused(false);
+        setDontSummarizeInput(false);
       }
       else {
-        if (!isFocused) {
-          setIsFocused(true);
+        if (!dontSummarizeInput) {
+          setDontSummarizeInput(true);
         }
       }
     });
-  }, [isFocused]);
+  }, [dontSummarizeInput]);
 
   // 붙여넣기 대응
   useEffect(()=>{
-    document.addEventListener('paste', (event) => {
+    document.addEventListener('paste', function(event) {
       // [NOT WORKING] event.stopPropagation();
       event.preventDefault();
   
@@ -76,15 +74,16 @@ const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRe
         event.clipboardData
         && event.clipboardData.getData
       ) {
+        console.log('TEST-INNER');
         pastedText = event.clipboardData.getData('text/plain');
-        document.getElementById('chat-input-text').innerText = 
-          document.getElementById('chat-input-text').innerText + pastedText;
+        document.getElementById('chat-input-text').textContent = 
+          document.getElementById('chat-input-text').textContent + pastedText;
       }
     }, {once: true});
   });
 
   return (
-    <StyledChatInput browserWidth={browserWidth} isFocused={isFocused}>
+    <StyledChatInput browserWidth={browserWidth} dontSummarizeInput={dontSummarizeInput}>
       <div className="chat-input-wrapper">
         <div className="chat-input">
 
@@ -94,8 +93,8 @@ const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRe
               contentEditable="true"
               className="chat-input-text"
               id="chat-input-text"
-              value={value}
-              ref={inputRef}
+              value={message}
+              ref={editableRef}
               onInput={handleMessageChange}
               rows="1"
             />
@@ -147,14 +146,14 @@ const StyledChatInput = styled.div`
       ${ Body14 };
 
       ${(props)=>
-        (props.isFocused) &&
+        (props.dontSummarizeInput) &&
         css`
         overflow-y: scroll;
         `
       }
 
       ${(props)=>
-        !(props.isFocused) &&
+        !(props.dontSummarizeInput) &&
         css`
         overflow-y: hidden;
         text-overflow: ellipsis;

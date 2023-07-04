@@ -2,9 +2,17 @@
 import { useState } from "react";
 import "./App.css";
 import ChatInput from "./components/ChatInput";
+import useInput from "./hooks/useInput";
 
 function App() {
   const [message, setMessage] = useState(0);
+  const {
+    value,
+    setValue,
+    isFocused,
+    setIsFocused,
+    inputRef,
+  } = useInput();
 
   return (
     <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
@@ -13,7 +21,12 @@ function App() {
 
         <ChatInput
           hasInfoBox={false}
-          maxLength={700}
+          maxLength={200}
+          value={value}
+          setValue={setValue}
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
+          inputRef={inputRef}
         />
       </div>
     </div>
