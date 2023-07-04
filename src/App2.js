@@ -14,6 +14,11 @@ function App() {
     inputRef,
   } = useInput();
 
+  const handleButton = () => {
+    alert('성공!')
+   
+  };
+
   return (
     <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
       <div style={{  width: "1200px", height: "300px", background:"#D9D9"}}>
@@ -27,6 +32,8 @@ function App() {
           isFocused={isFocused}
           setIsFocused={setIsFocused}
           inputRef={inputRef}
+          buttonClick={handleButton}
+          placeHolder={'label'}
         />
       </div>
     </div>

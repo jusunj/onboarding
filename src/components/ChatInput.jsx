@@ -4,7 +4,7 @@ import { Body14, Body12 } from "../styles/typography";
 import ChatInput_send_button from "../svg/ChatInput_send_button";
 // import useInput from "../hooks/useInput";
 
-const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRef}) => {
+const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRef, buttonClick, placeHolder}) => {
   // const { value, setValue, isFocused, setIsFocused, inputRef } = useInput();
 
   // const editableRef = useRef(null);           // inputRef와 대응
@@ -67,20 +67,23 @@ const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRe
 
   // 붙여넣기 대응
   useEffect(()=>{
-    document.addEventListener('paste', (event) => {
-      // [NOT WORKING] event.stopPropagation();
+    const handlePaste = (event) => {
+      event.stopPropagation();
       event.preventDefault();
-  
+
       let pastedText = '';
-      if (
-        event.clipboardData
-        && event.clipboardData.getData
-      ) {
+      if (event.clipboardData && event.clipboardData.getData) {
         pastedText = event.clipboardData.getData('text/plain');
-        document.getElementById('chat-input-text').innerText = 
-          document.getElementById('chat-input-text').innerText + pastedText;
+        document.getElementById('chat-input-text').innerText += pastedText;
+        event.clipboardData.clearData();
       }
-    }, {once: true});
+    };
+
+    document.addEventListener('paste', handlePaste, {once: true});
+
+    return () => {
+      document.removeEventListener('paste', handlePaste);
+    };
   });
 
   return (
@@ -98,18 +101,26 @@ const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRe
               ref={inputRef}
               onInput={handleMessageChange}
               rows="1"
+              placeholder={placeHolder}
             />
 
           </div>
 
-          <div className="chat-input-button-wrapper">
+          {/* <div className="chat-input-button-wrapper"> */}
             {/* 메시지 전송 부분 */}
             <ChatInput_send_button
+              onClick={() => 
+                {
+                  buttonClick();
+                  document.getElementById('chat-input-text').innerText = null;
+                  setValue('');
+                }
+              }
               className="chat-input-button"
               id="chat-input-button"
               color={buttonActivate ? '#7B33FF' : '#EBEBEB'}
             />
-          </div>
+          {/* </div> */}
 
         </div>
       </div>
@@ -169,6 +180,7 @@ const StyledChatInput = styled.div`
   }
 
   .chat-input-button-wrapper {
+    .chat-input-button {
       position: absolute;
       bottom: 9px;
       right: 14px;
