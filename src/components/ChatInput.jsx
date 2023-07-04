@@ -28,11 +28,28 @@ const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRe
     // console.log(value, '>>>', value.length);
   };
 
-  // 버튼 활성화 관련 코드
   useEffect(() => {
+    // 버튼 활성화 관련 코드
     if (value.length >= maxLength) setButtonActivate(false);
     else if (value.length > 0) setButtonActivate(true);
     else setButtonActivate(false);
+
+    // 텍스트 방어 관련 코드
+    const defenseTyping = (event) => {
+      const forbiddenKeys = ['Backspace', 'Delete', 'Enter']; // 타자 입력을 막을 키
+      if ((value.length >= maxLength) && !(forbiddenKeys.includes(event.key))) {
+        event.preventDefault();
+
+        // alert 코드는 여기에 들어가야 합니다
+        alert(`최대 ${maxLength}글자까지만 남기실 수 있습니다.`);
+      }
+    }
+
+    document.addEventListener('keydown', defenseTyping);
+    
+    return () => {
+      document.removeEventListener('keydown', defenseTyping);
+    };
   }, [value, buttonActivate]);
 
   // 브라우저 너비 관련 코드
