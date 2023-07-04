@@ -61,14 +61,22 @@ const ChatInput = ({maxLength}) => {
         }
       }
     });
-
-    if (!dontSummarizeInput) {
-      // 다른 영역을 클릭했을 때, 할 행동을 개발
-    }
-    else {
-      // 채팅 폼을 클릭했을 때, 할 행동을 개발
-    }
   }, [dontSummarizeInput]);
+
+  // 붙여넣기 대응
+  document.addEventListener('paste', function(event) {
+    event.preventDefault();
+    let pastedText = '';
+
+    if (event.clipboardData && event.clipboardData.getData) {
+      pastedText = event.clipboardData.getData('text/plain');
+    }
+    
+    if (maxLength > (document.getElementById('chat-input-text').innerText.length + pastedText.length)) {
+      document.getElementById('chat-input-text').textContent = 
+        document.getElementById('chat-input-text').textContent + pastedText;
+    }
+  });
 
   return (
     <StyledChatInput browserWidth={browserWidth} dontSummarizeInput={dontSummarizeInput}>
