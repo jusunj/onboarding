@@ -190,7 +190,15 @@ const StyledChatInput = styled.div`
       padding: 0px;
     }
   }
-  
+
+  [placeholder]:empty::before {
+    content: attr(placeholder);
+    color: #C2C2C2; 
+  }
+
+  [placeholder]:empty:focus::before {
+      content: "";
+  }
 `;
 
 export default ChatInput;

@@ -1,11 +1,9 @@
 // import logo from "./logo.svg";
-import { useState } from "react";
 import "./App.css";
 import ChatInput from "./components/ChatInput";
 import useInput from "./hooks/useInput";
 
 function App() {
-  const [message, setMessage] = useState(0);
   const {
     value,
     setValue,
@@ -15,8 +13,7 @@ function App() {
   } = useInput();
 
   const handleButton = () => {
-    alert('성공!')
-   
+    alert('버튼을 눌렀을 때 전송되는 코드가 여기에 들어가야 합니다.');
   };
 
   return (
@@ -33,7 +30,7 @@ function App() {
           setIsFocused={setIsFocused}
           inputRef={inputRef}
           buttonClick={handleButton}
-          placeHolder={'label'}
+          placeHolder={'메시지를 입력해 주세요.'}
         />
       </div>
     </div>
