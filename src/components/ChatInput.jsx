@@ -103,10 +103,9 @@ const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRe
               rows="1"
               placeholder={placeHolder}
             />
-
           </div>
 
-          {/* <div className="chat-input-button-wrapper"> */}
+          <div className="chat-input-button-wrapper">
             {/* 메시지 전송 부분 */}
             <ChatInput_send_button
               onClick={() => 
@@ -120,7 +119,7 @@ const ChatInput = ({maxLength, value, setValue, isFocused, setIsFocused, inputRe
               id="chat-input-button"
               color={buttonActivate ? '#7B33FF' : '#EBEBEB'}
             />
-          {/* </div> */}
+          </div>
 
         </div>
       </div>
@@ -180,14 +179,16 @@ const StyledChatInput = styled.div`
   }
 
   .chat-input-button-wrapper {
+    position: absolute;
+    bottom: 9px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    margin: 0px;
+    padding: 0px;
+
     .chat-input-button {
-      position: absolute;
-      bottom: 9px;
-      right: 14px;
-      width: 36px;
-      height: 36px;
-      margin: 0px;
-      padding: 0px;
+      
     }
   }
 
