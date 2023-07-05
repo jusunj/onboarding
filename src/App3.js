@@ -14,15 +14,22 @@ function App() {
 
   
   return (
-    <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
-      <div style={{  width: "1200px", height: "100vh", background:"#9D9D"}}>
+    <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
+      <div style={{ height: "100vh", background: "#9D9D" }}>
         App3
         <br/><br/>
 
         {
           true &&
           <div>
-            <ContentsCard />
+            <ContentsCard
+              title={'라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨'}
+              subtitle={'라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨'
+              +'라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨'}
+              img={'logo512.png'}
+              mobileImgHeight={240}
+              date={'2019.03.01'}
+            />
           </div>
         }
 

@@ -6,20 +6,118 @@ import {
 } from "../styles/typography";
 
 const ContentsCard = ({
-  // initial value required
+  title,
+  subtitle,
+  img,
+  mobileImgHeight,
+  date,
 }) => {
 
   return (
-    <StyledContentsCard>
-      <div>
+    <StyledContentsCard mobileImgHeight={mobileImgHeight}>
+      <div className="contents-card-image-wrapper">
+        <img className="contents-card-image" src={img} alt="IMAGE NOT FOUND"/>
+      </div>
+      <div className="contents-card-text-wrapper">
+        <div className="contents-card-text">
 
+          <div className="contents-card-text-title">
+            {title}
+          </div>
+          <div className="contents-card-text-subtitle">
+            {subtitle}
+          </div>
+          <div className="contents-card-text-date">
+            {date}
+          </div>
+        </div>
       </div>
     </StyledContentsCard>
   );
 };
 
 const StyledContentsCard = styled.div`
+  display: flex;
   
+  @media (max-width: 791px) {
+    display: block;
+  }
+
+  // 이미지
+  .contents-card-image-wrapper {
+    background-color: #F8F8F8;
+    height: 200px;
+    max-width: 200px;
+    border-radius: 20px;
+    
+    @media (max-width: 791px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+      max-width: 100%;
+      height: ${(props)=>props.mobileImgHeight}px;
+      max-height: ${(props)=>props.mobileImgHeight}px;
+      overflow: hidden;
+    }
+    
+    .contents-card-image {
+      width: inherit;
+      height: inherit;
+      
+      @media (max-width: 791px) {
+        object-fit: cover;
+      }
+    }
+  }
+  
+  // 텍스트
+  .contents-card-text-wrapper {
+    margin: auto;
+    padding-left: 48px;
+    text-align: left;
+
+    @media (max-width: 791px) {
+      padding-left: 0px;
+      padding-top: 20px;
+    }
+
+    .contents-card-text-title {
+      ${Header30}
+      color: #303030;
+      margin-bottom: 10px;
+      word-break: break-all;
+
+      @media (max-width: 791px) {
+        ${Header24}
+      }
+    }
+
+    .contents-card-text-subtitle {
+      ${ContentsBody16}
+      color: #555555;
+      margin-bottom: 8px;
+      word-break: break-all;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* 최대 줄 수 설정 */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @media (max-width: 791px) {
+        ${ContentsBody14}
+      }
+    }
+
+    .contents-card-text-date {
+      ${ContentsBody14}
+      color: #999999;
+
+      @media (max-width: 791px) {
+        ${ContentsBody13}
+      }
+    }
+  }
 `;
 
 export default ContentsCard;
