@@ -105,7 +105,7 @@ const StyledContentsCard = styled.div`
       text-overflow: ellipsis;
 
       @media (max-width: 791px) {
-        ${ContentsBody14}
+        ${ContentsBody15}
       }
     }
 
