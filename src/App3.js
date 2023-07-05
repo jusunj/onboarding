@@ -1,8 +1,8 @@
 // import logo from "./logo.svg";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 import "./App.css";
 import FullWidthButton from "./components/FullWidthButton";
 import Radio from "./components/Radio";
+import ContentsCard from "./components/ContentsCard";
 import useInput from "./hooks/useInput";
 
 function App() {
@@ -21,6 +21,13 @@ function App() {
 
         {
           true &&
+          <div>
+            <ContentsCard />
+          </div>
+        }
+
+        {
+          false &&
           <div>
             <input type="text"
               onFocus={()=>setIsFocused(true)}

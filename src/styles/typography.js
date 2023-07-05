@@ -64,6 +64,14 @@ export const Header24 = css`
   font-style: normal;
 `;
 
+export const Header30 = css`
+  font-size: 30px;
+  font-family: "Prentendard Bold";
+  line-height: 39px;
+  font-weight: 700;
+  font-style: normal;
+`;
+
 export const Header32 = css`
   font-size: 32px;
   font-family: "Pretendard Bold";
