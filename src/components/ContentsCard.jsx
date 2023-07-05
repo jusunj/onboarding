@@ -9,12 +9,14 @@ const ContentsCard = ({
   title,
   subtitle,
   img,
-  mobileImgHeight,
+  // mobileImgHeight,
   date,
 }) => {
 
   return (
-    <StyledContentsCard mobileImgHeight={mobileImgHeight}>
+    <StyledContentsCard
+      // mobileImgHeight={mobileImgHeight}
+    >
       <div className="contents-card-image-wrapper">
         <img className="contents-card-image" src={img} alt="IMAGE NOT FOUND"/>
       </div>
@@ -38,15 +40,18 @@ const ContentsCard = ({
 
 const StyledContentsCard = styled.div`
   display: flex;
+  width: 792px;
   
   @media (max-width: 791px) {
     display: block;
+    width: 100%;
   }
 
   // 이미지
   .contents-card-image-wrapper {
     background-color: #F8F8F8;
     height: 200px;
+    width: 200px;
     max-width: 200px;
     border-radius: 20px;
     
@@ -56,14 +61,17 @@ const StyledContentsCard = styled.div`
       align-items: center;
       width: auto;
       max-width: 100%;
-      height: ${(props)=>props.mobileImgHeight}px;
-      max-height: ${(props)=>props.mobileImgHeight}px;
+      height: 240px;
+      max-height: 240px;
+      // height: ${(props)=>props.mobileImgHeight}px;
+      // max-height: ${(props)=>props.mobileImgHeight}px;
       overflow: hidden;
     }
     
     .contents-card-image {
       width: inherit;
       height: inherit;
+      object-fit: cover;
       
       @media (max-width: 791px) {
         object-fit: cover;
