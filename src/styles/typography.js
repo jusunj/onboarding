@@ -150,7 +150,7 @@ export const ContentsHeader20 = css`
   font-size: 20px;
   font-family: "Pretendard Bold";
   line-height: 34.5px;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   letter-spacing: 0px;
 `;
@@ -159,7 +159,7 @@ export const ContentsHeader19 = css`
   font-size: 19px;
   font-family: "Pretendard Bold";
   line-height: 32.5px;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   letter-spacing: -0.1px;
 `;
@@ -168,7 +168,7 @@ export const ContentsHeader18 = css`
   font-size: 18px;
   font-family: "Pretendard Bold";
   line-height: 30.5px;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   letter-spacing: -0.15px;
 `;
@@ -177,7 +177,7 @@ export const ContentsHeader17 = css`
   font-size: 17px;
   font-family: "Pretendard Bold";
   line-height: 28.5px;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   letter-spacing: -0.2px;
 `;
@@ -186,7 +186,7 @@ export const ContentsHeader16 = css`
   font-size: 16px;
   font-family: "Pretendard Bold";
   line-height: 26.5px;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   letter-spacing: -0.25px;
 `;
@@ -195,7 +195,7 @@ export const ContentsHeader15 = css`
   font-size: 15px;
   font-family: "Pretendard Bold";
   line-height: 24.5px;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   letter-spacing: -0.35px;
 `;
@@ -204,7 +204,7 @@ export const ContentsHeader14 = css`
   font-size: 14px;
   font-family: "Pretendard Bold";
   line-height: 22.5px;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   letter-spacing: -0.4px;
 `;
@@ -213,7 +213,7 @@ export const ContentsHeader13 = css`
   font-size: 13px;
   font-family: "Pretendard Bold";
   line-height: 20.5px;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   letter-spacing: -0.45px;
 `;
