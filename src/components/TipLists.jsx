@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled, { css } from "styled-components";
-import Header from "../components/Header";
-import ContentsCard from "../components/ContentsCard";
+import Header from "./Header";
+import ContentsCard from "./ContentsCard";
+import dataset from "./TipData";
+import { Link } from "react-router-dom";
 
 const TipLists = ({
-  dataset
+  // 필요한 인자가 여기에 들어갑니다.
+  // 현재 json 파일들로 구성된 dataset을 직접 임포트하므로 사용하지 않습니다.
 }) => {
   // 브라우저 유형별 헤더 스타일 적용
   const headerStyleWeb = {
@@ -17,8 +20,6 @@ const TipLists = ({
     // Header 태그에서 모바일 디자인을 변경해야 하는 경우 사용
     marginBottom: '30px'
   };
-
-  console.log(dataset);
 
   // 브라우저 크기
   const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
@@ -51,13 +52,15 @@ const TipLists = ({
           return (
             <div className="contents-card-list">
               <div className="contents-card-element">
-                <ContentsCard
-                  title={element.name}
-                  subtitle={element.sub}
-                  img={element.thumbnail}
-                  date={element.date}
-                  onClick={()=>{/* goto some specific url by using 'url' attribute in json files. */}}
-                />
+                <Link to={`/tipDetails?id=${element.id}`} style={{textDecoration: 'none'}}>
+                  <ContentsCard
+                    title={element.name}
+                    subtitle={element.sub}
+                    img={element.thumbnail}
+                    date={element.date}
+                    onClick={()=>{/* goto some specific url by using 'url' attribute in json files. */}}
+                  />
+                </Link>
               </div>
             </div>
           );
