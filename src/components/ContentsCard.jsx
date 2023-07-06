@@ -72,6 +72,7 @@ const StyledContentsCard = styled.div`
       width: inherit;
       height: inherit;
       object-fit: cover;
+      border-radius: 20px;
       
       @media (max-width: 791px) {
         object-fit: cover;
@@ -81,9 +82,9 @@ const StyledContentsCard = styled.div`
   
   // 텍스트
   .contents-card-text-wrapper {
-    margin: auto;
+    // margin: auto;
     padding-left: 48px;
-    text-align: left;
+    text-align: left !important;
 
     @media (max-width: 791px) {
       padding-left: 0px;
