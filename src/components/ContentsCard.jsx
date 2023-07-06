@@ -41,6 +41,7 @@ const ContentsCard = ({
 const StyledContentsCard = styled.div`
   display: flex;
   width: 792px;
+  cursor: pointer;
   
   @media (max-width: 791px) {
     display: block;

@@ -15,9 +15,7 @@ import JSON06 from "./assets/tipJsons/item06.json";
 
 function App() {
   // @/assets/tipJsons 안에 있는 모든 json 파일을 데이터셋에 저장
-  const dataset = [];
-  dataset.push(JSON01, JSON02, JSON03, JSON04, JSON05, JSON06);
-  // console.log(dataset);
+  const dataset = [JSON01, JSON02, JSON03, JSON04, JSON05, JSON06];
   
   return (
     <div
