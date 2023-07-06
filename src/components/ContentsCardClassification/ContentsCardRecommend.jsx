@@ -3,42 +3,35 @@ import styled, { css } from "styled-components";
 import {
   Header30, Header24,
   ContentsBody16, ContentsBody15, ContentsBody14, ContentsBody13
-} from "../styles/typography";
+} from "../../styles/typography";
 
-const ContentsCard = ({
+const ContentsCardRecommend = ({
   title,
   subtitle,
   img,
-  // mobileImgHeight,
-  date,
+  size,
 }) => {
 
   return (
-    <StyledContentsCard
-      // mobileImgHeight={mobileImgHeight}
-    >
+    <StyledContentsCardRecommend>
       <div className="contents-card-image-wrapper">
         <img className="contents-card-image" src={img} alt="IMAGE NOT FOUND"/>
       </div>
       <div className="contents-card-text-wrapper">
         <div className="contents-card-text">
-
           <div className="contents-card-text-title">
             {title}
           </div>
           <div className="contents-card-text-subtitle">
             {subtitle}
           </div>
-          <div className="contents-card-text-date">
-            {date}
-          </div>
         </div>
       </div>
-    </StyledContentsCard>
+    </StyledContentsCardRecommend>
   );
 };
 
-const StyledContentsCard = styled.div`
+const StyledContentsCardRecommend = styled.div`
   display: flex;
   width: 792px;
   cursor: pointer;
@@ -68,8 +61,6 @@ const StyledContentsCard = styled.div`
       max-width: 100%;
       height: 240px;
       max-height: 240px;
-      // height: ${(props)=>props.mobileImgHeight}px;
-      // max-height: ${(props)=>props.mobileImgHeight}px;
       overflow: hidden;
     }
     
@@ -134,4 +125,4 @@ const StyledContentsCard = styled.div`
   }
 `;
 
-export default ContentsCard;
+export default ContentsCardRecommend;

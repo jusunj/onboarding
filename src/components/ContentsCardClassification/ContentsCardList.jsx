@@ -3,20 +3,17 @@ import styled, { css } from "styled-components";
 import {
   Header30, Header24,
   ContentsBody16, ContentsBody15, ContentsBody14, ContentsBody13
-} from "../styles/typography";
+} from "../../styles/typography";
 
-const ContentsCard = ({
+const ContentsCardList = ({
   title,
   subtitle,
   img,
-  // mobileImgHeight,
   date,
 }) => {
 
   return (
-    <StyledContentsCard
-      // mobileImgHeight={mobileImgHeight}
-    >
+    <StyledContentsCardList>
       <div className="contents-card-image-wrapper">
         <img className="contents-card-image" src={img} alt="IMAGE NOT FOUND"/>
       </div>
@@ -34,11 +31,11 @@ const ContentsCard = ({
           </div>
         </div>
       </div>
-    </StyledContentsCard>
+    </StyledContentsCardList>
   );
 };
 
-const StyledContentsCard = styled.div`
+const StyledContentsCardList = styled.div`
   display: flex;
   width: 792px;
   cursor: pointer;
@@ -68,8 +65,6 @@ const StyledContentsCard = styled.div`
       max-width: 100%;
       height: 240px;
       max-height: 240px;
-      // height: ${(props)=>props.mobileImgHeight}px;
-      // max-height: ${(props)=>props.mobileImgHeight}px;
       overflow: hidden;
     }
     
@@ -134,4 +129,4 @@ const StyledContentsCard = styled.div`
   }
 `;
 
-export default ContentsCard;
+export default ContentsCardList;
