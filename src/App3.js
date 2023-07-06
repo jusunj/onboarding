@@ -11,16 +11,14 @@ function App() {
     alert('버튼이 클릭되었습니다!');
   };
   const buttonText = '라벨';
-
   
   return (
     <div style={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
       <div style={{ height: "100vh", background: "#9D9D" }}>
         App3
-        <br/><br/>
 
         {
-          true &&
+          false &&
           <div style={{ background: "#FA33FA" }}>
             <ContentsCard
               title={'라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨'}
@@ -29,7 +27,7 @@ function App() {
               + '라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨'
               + '라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨라벨'}
               // img={'logo512.png'}
-              img={'1.jpg'}
+              img={'contentsCardImages/1.jpg'}
               // mobileImgHeight={270}
               date={'2019.03.01'}
             />
@@ -58,7 +56,6 @@ function App() {
             <Radio />
             <Radio backgroundColor={'#9D9D'} />
             <Radio backgroundColor={'#9D9D'} />
-
             <Radio backgroundColor={'#9D9D'} disabled={true} disabledStatus={true} />
             <Radio backgroundColor={'#9D9D'} disabled={true} disabledStatus={false} />    
           </div>
