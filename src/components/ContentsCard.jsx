@@ -59,7 +59,7 @@ const StyledContentsCard = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      width: auto;
+      width: 100%;
       max-width: 100%;
       height: 240px;
       max-height: 240px;

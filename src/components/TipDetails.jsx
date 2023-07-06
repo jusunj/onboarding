@@ -8,6 +8,22 @@ const TipDetails = ({
 }) => {
   const { name, date, contents } = data;
   let elementCounter = 0; // 마지막 콘텐츠에는 margin-bottom이 들어가지 않음
+
+  useEffect(()=>{
+    const forbiddenScrap = (event) => {
+      event.preventDefault();
+    }
+
+    document.addEventListener('copy', forbiddenScrap);
+    document.addEventListener('cut', forbiddenScrap);
+    document.addEventListener('paste', forbiddenScrap);
+
+    return () => {
+      document.removeEventListener('copy', forbiddenScrap);
+      document.removeEventListener('cut', forbiddenScrap);
+      document.removeEventListener('paste', forbiddenScrap);
+    };
+  }, []);
   
   return (
     <StyledTipDetails>
@@ -41,6 +57,11 @@ const StyledTipDetails = styled.div`
   width: 588px;
   margin-top: 24px;
   margin-bottom: 40px;
+  cursor: default;
+  -webkit-user-select: none; /* Chrome, Safari, Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 
   @media (max-width: 791px) {
     width: 100%;

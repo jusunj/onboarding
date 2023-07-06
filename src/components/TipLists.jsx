@@ -70,6 +70,12 @@ const TipLists = ({
 const StyledTipLists = styled.div`
   margin-top: 24px;
   margin-bottom: 100px;
+  cursor: default;
+  -webkit-user-select: none; /* Chrome, Safari, Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+
 
   @media (max-width: 791px) {
     margin-top: 0px;
