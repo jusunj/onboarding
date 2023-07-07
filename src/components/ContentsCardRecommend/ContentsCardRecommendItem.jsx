@@ -51,8 +51,12 @@ const StyledContentsCardRecommendItem = styled.div`
     align-items: center;
     width: 100%;
     max-width: 100%;
-    height: auto;
+    height: 260px;
     overflow: hidden;
+
+    @media (max-width: 791px) {
+      height: 167px;
+    }
     
     .contents-card-image {
       width: inherit;
