@@ -1,11 +1,11 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import ContentsCardList from "./components/ContentsCardClassification/ContentsCardList";
+import ContentsCard from "./components/ContentsCard";
 import ContentsCardRecommend from "./components/ContentsCardClassification/ContentsCardRecommend";
-import data from "./assets/examplePage.json"
+import data from "./assets/contentsJsons/contentsExample.json"
+import dataset from "./assets/contentsJsons/TipData"
 
 function App() {
-  
 
   return (
     <div
@@ -17,7 +17,7 @@ function App() {
     >
       {
         false &&
-        <ContentsCardList
+        <ContentsCard
           title={data.name}
           subtitle={data.sub}
           date={data.date}
@@ -26,49 +26,7 @@ function App() {
       }
       {
         true &&
-        <div>
-          <ContentsCardRecommend
-            title={data.name}
-            subtitle={data.sub}
-            img={data.thumbnail}
-            size={'large'}
-          />
-          <ContentsCardRecommend
-            title={data.name}
-            subtitle={data.sub}
-            img={data.thumbnail}
-            size={'large'}
-          />
-          <ContentsCardRecommend
-            title={data.name}
-            subtitle={data.sub}
-            img={data.thumbnail}
-            size={'large'}
-            />
-        </div>
-      }
-      {
-        false &&
-        <div>
-          <ContentsCardRecommend
-            title={data.name}
-            subtitle={data.sub}
-            img={data.thumbnail}
-            size={'small'}
-          />
-          <ContentsCardRecommend
-            title={data.name}
-            subtitle={data.sub}
-            img={data.thumbnail}
-            size={'small'}
-          />
-          <ContentsCardRecommend
-            title={data.name}
-            subtitle={data.sub}
-            img={data.thumbnail}
-            size={'small'}
-            />
-        </div>
+        <ContentsCardRecommend dataset={dataset} />
       }
     </div>
   );

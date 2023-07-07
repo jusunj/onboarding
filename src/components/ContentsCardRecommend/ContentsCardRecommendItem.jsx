@@ -5,15 +5,14 @@ import {
   ContentsBody16, ContentsBody15, ContentsBody14, ContentsBody13
 } from "../../styles/typography";
 
-const ContentsCardRecommend = ({
+const ContentsCardRecommendItem = ({
   title,
   subtitle,
   img,
-  size,
+  mobileSize,
 }) => {
-
   return (
-    <StyledContentsCardRecommend>
+    <StyledContentsCardRecommendItem mobileSize={mobileSize}>
       <div className="contents-card-image-wrapper">
         <img className="contents-card-image" src={img} alt="IMAGE NOT FOUND"/>
       </div>
@@ -27,13 +26,18 @@ const ContentsCardRecommend = ({
           </div>
         </div>
       </div>
-    </StyledContentsCardRecommend>
+    </StyledContentsCardRecommendItem>
   );
 };
 
-const StyledContentsCardRecommend = styled.div`
-  display: flex;
-  width: 792px;
+const StyledContentsCardRecommendItem = styled.div`
+  // grid-column-start: 1;  // >> 1 | 2 | 3
+  // grid-column-end: 2;    // >> 2 | 3 | 4
+  // grid-row-start: 1;
+  // grid-row-end: 2;
+
+  width: 384px;
+  height: 419px;
   cursor: pointer;
   -webkit-user-select: none; /* Chrome, Safari, Opera */
   -moz-user-select: none; /* Firefox */
@@ -41,8 +45,10 @@ const StyledContentsCardRecommend = styled.div`
   user-select: none;
   
   @media (max-width: 791px) {
-    display: block;
-    width: 100%;
+    width: ${
+      (props)=>((props.mobileSize === 'large') ? '260px' : '167px')
+    }px;
+    height: 167px;
   }
 
   // 이미지
@@ -125,4 +131,4 @@ const StyledContentsCardRecommend = styled.div`
   }
 `;
 
-export default ContentsCardRecommend;
+export default ContentsCardRecommendItem;

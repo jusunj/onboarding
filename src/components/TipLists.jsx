@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import styled, { css } from "styled-components";
 import Header from "./Header";
 import ContentsCard from "./ContentsCard";
-import dataset from "./TipData";
+import dataset from "../assets/contentsJsons/TipData";
 import { Link } from "react-router-dom";
 
 const TipLists = ({

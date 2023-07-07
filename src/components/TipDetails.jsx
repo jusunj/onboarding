@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { ContentsHeader20, ContentsBody16, ContentsBody15 } from "../styles/typography";
-import dataset from "./TipData";
+import dataset from "../assets/contentsJsons/TipData";
 
 const TipDetails = ({
   // param으로 해당 값을 받고 있으므로 현재 필요하지 않음
