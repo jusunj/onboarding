@@ -47,6 +47,11 @@ const ContentsCardRecommend = ({
 };
 
 const StyledContentsCardRecommend = styled.div`
+  @media (max-width: 791px) {
+    display: flex;
+    overflow-x: auto;
+  }
+
   .contents-card-recommend-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -60,7 +65,6 @@ const StyledContentsCardRecommend = styled.div`
         white-space: nowrap;
         column-gap: 20px;
         float: left;
-        overflow: auto;
         `
         :
         ``
@@ -78,8 +82,8 @@ const StyledContentsCardRecommend = styled.div`
     }
   }
 
-  .contents-card-recommend-row::-webkit-scrollbar {
-    // display: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
 

@@ -42,9 +42,6 @@ const StyledContentsCardRecommendItem = styled.div`
     width: ${
       (props)=>((props.mobileSize === 'large') ? '260px' : '')
     };
-    height: ${
-      (props)=>((props.mobileSize === 'large') ? '292px' : '')
-    };
   }
 
   // 이미지
@@ -56,7 +53,6 @@ const StyledContentsCardRecommendItem = styled.div`
     max-width: 100%;
     height: auto;
     overflow: hidden;
-
     
     .contents-card-image {
       width: inherit;
@@ -78,7 +74,7 @@ const StyledContentsCardRecommendItem = styled.div`
 
     @media (max-width: 791px) {
       padding-top: 10px;
-      height: ${(props)=>(props.mobileSize === 'large') ? 'auto' : '127px'};
+      height: ${(props)=>(props.mobileSize === 'large') ? '125px' : '127px'};
     }
 
     .contents-card-text-title {
