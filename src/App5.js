@@ -30,11 +30,11 @@ function App() {
       {/* DUMMY TEXT */}
       {
         true &&
-        <ContentsCardRecommend dataset={dataset} mobileSize={'small'} rowMargin={12} rowMarginMobile={10} />
+        <ContentsCardRecommend dataset={dataset} mobileSize={'large'} />
       }
       {
         false &&
-        <ContentsCardRecommend dataset={dataset} mobileSize={'small'}/>
+        <ContentsCardRecommend dataset={dataset} mobileSize={'small'} />
       }
     </div>
   );
