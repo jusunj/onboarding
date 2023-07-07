@@ -40,10 +40,26 @@ export const Header12 = css`
   font-style: normal;
 `;
 
+export const Header14 = css`
+  font-size: 14px;
+  font-family: "Pretendard Bold";
+  line-height: 20px;
+  font-weight: 700;
+  font-style: normal;
+`;
+
 export const Header16 = css`
   font-size: 16px;
   font-family: "Pretendard Bold";
   line-height: 24px;
+  font-weight: 700px;
+  font-style: normal;
+`;
+
+export const Header18 = css`
+  font-size: 18px;
+  font-family: "Pretendard Bold";
+  line-height: 26px;
   font-weight: 700px;
   font-style: normal;
 `;
@@ -54,6 +70,14 @@ export const Header20 = css`
   line-height: 28px;
   font-weight: 700;
   font-style: normal;
+`;
+
+export const Header22 = css`
+font-size: 22px;
+font-family: "Pretendard Bold";
+line-height: 30px;
+font-weight: 700;
+font-style: normal;
 `;
 
 export const Header24 = css`

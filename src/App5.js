@@ -1,7 +1,7 @@
 // import logo from "./logo.svg";
 import "./App.css";
 import ContentsCard from "./components/ContentsCard";
-import ContentsCardRecommend from "./components/ContentsCardClassification/ContentsCardRecommend";
+import ContentsCardRecommend from "./components/ContentsCardRecommend/ContentsCardRecommend";
 import data from "./assets/contentsJsons/contentsExample.json"
 import dataset from "./assets/contentsJsons/TipData"
 
@@ -26,7 +26,11 @@ function App() {
       }
       {
         true &&
-        <ContentsCardRecommend dataset={dataset} />
+        <ContentsCardRecommend dataset={dataset} mobileSize={'large'}/>
+      }
+      {
+        false &&
+        <ContentsCardRecommend dataset={dataset} mobileSize={'small'}/>
       }
     </div>
   );

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import {
-  Header30, Header24,
-  ContentsBody16, ContentsBody15, ContentsBody14, ContentsBody13
+  Header22, Header18, Header14,
+  ContentsBody15, ContentsBody14, ContentsBody13
 } from "../../styles/typography";
 
 const ContentsCardRecommendItem = ({
@@ -31,11 +31,6 @@ const ContentsCardRecommendItem = ({
 };
 
 const StyledContentsCardRecommendItem = styled.div`
-  // grid-column-start: 1;  // >> 1 | 2 | 3
-  // grid-column-end: 2;    // >> 2 | 3 | 4
-  // grid-row-start: 1;
-  // grid-row-end: 2;
-
   width: 384px;
   height: 419px;
   cursor: pointer;
@@ -46,28 +41,27 @@ const StyledContentsCardRecommendItem = styled.div`
   
   @media (max-width: 791px) {
     width: ${
-      (props)=>((props.mobileSize === 'large') ? '260px' : '167px')
+      (props)=>((props.mobileSize === 'large') ? 260 : 167)
     }px;
-    height: 167px;
+    height: ${
+      (props)=>((props.mobileSize === 'large') ? 292 : 294)
+    }px;
   }
 
   // 이미지
   .contents-card-image-wrapper {
-    background-color: #F8F8F8;
-    height: 200px;
-    width: 200px;
-    max-width: 200px;
-    border-radius: 20px;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    height: 260px;
+    max-height: 260px;
+    overflow: hidden;
+
     @media (max-width: 791px) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      max-width: 100%;
-      height: 240px;
-      max-height: 240px;
-      overflow: hidden;
+      height: 167px;
+      max-height: 167px;
     }
     
     .contents-card-image {
@@ -84,48 +78,37 @@ const StyledContentsCardRecommendItem = styled.div`
   
   // 텍스트
   .contents-card-text-wrapper {
-    // margin: auto;
-    padding-left: 48px;
     text-align: left !important;
+    padding-top: 20px;
 
     @media (max-width: 791px) {
-      padding-left: 0px;
-      padding-top: 20px;
+      padding-top: 10px;
     }
 
     .contents-card-text-title {
-      ${Header30}
+      ${Header22}
       color: #303030;
       margin-bottom: 10px;
       word-break: break-all;
 
       @media (max-width: 791px) {
-        ${Header24}
+        ${(props)=>(props.mobileSize) ? Header18 : Header14}
+        margin-bottom: 8px;
       }
     }
 
     .contents-card-text-subtitle {
-      ${ContentsBody16}
+      ${ContentsBody15}
       color: #555555;
-      margin-bottom: 8px;
       word-break: break-all;
       display: -webkit-box;
-      -webkit-line-clamp: 3; /* 최대 줄 수 설정 */
+      -webkit-line-clamp: 2; /* 최대 줄 수 설정 */
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
 
       @media (max-width: 791px) {
-        ${ContentsBody15}
-      }
-    }
-
-    .contents-card-text-date {
-      ${ContentsBody14}
-      color: #999999;
-
-      @media (max-width: 791px) {
-        ${ContentsBody13}
+        ${(props)=>(props.mobileSize) ? ContentsBody14 : ContentsBody13}
       }
     }
   }
