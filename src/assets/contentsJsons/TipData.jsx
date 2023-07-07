@@ -5,7 +5,9 @@ import JSON04 from "./1004.json";
 import JSON05 from "./1005.json";
 import JSON06 from "./1006.json";
 import JSON07 from "./1007.json";
+import JSON08 from "./1008.json";
 
-const dataset = [JSON01, JSON02, JSON03, JSON04, JSON05, JSON06, JSON07];
+
+const dataset = [JSON01, JSON02, JSON03, JSON04, JSON05, JSON06, JSON07, JSON08];
 
 export default dataset;
