@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
-import { ContentsHeader20, ContentsBody16, ContentsBody15 } from "../styles/typography";
+import { ContentsHeader20, ContentsBody16, ContentsBody15, ContentsBody13 } from "../styles/typography";
 import dataset from "../assets/contentsJsons/TipData";
 
 const TipDetails = ({
@@ -58,7 +58,17 @@ const TipDetails = ({
                 {
                   (element.type === 'image')
                   &&
-                  (<img src={element.content} alt="IMAGE NOT FOUND"/>)
+                  (
+                    <div>
+                      <img src={element.content} alt="IMAGE NOT FOUND"/>
+                      {
+                      (element.source !== "")
+                      ?
+                      (<span className="image-source">{element.source}</span>)
+                      :
+                      ''}
+                    </div>
+                  )
                   ||
                   element.content
                 }
@@ -122,6 +132,20 @@ const StyledTipDetails = styled.div`
     
     @media (max-width: 791px) {
       margin-bottom: 30px;
+    }
+  }
+
+  .image-source {
+    ${ContentsBody13}
+    color: #858585;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    
+    @media (max-width: 791px) {
+      margin-top: 12px;
     }
   }
 
