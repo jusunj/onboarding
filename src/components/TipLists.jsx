@@ -52,8 +52,12 @@ const TipLists = ({
           return (
             <div className="contents-card-list">
               <div className="contents-card-element">
-                <Link to={`/tipDetails?id=${element.id}`} style={{textDecoration: 'none'}}>
+                <Link
+                  className="contents-card-item-link"
+                  to={`/tipDetails?id=${element.id}`}
+                >
                   <ContentsCard
+                    style={{width: '100%'}}
                     title={element.name}
                     subtitle={element.sub}
                     img={element.thumbnail}
@@ -88,6 +92,18 @@ const StyledTipLists = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 60px;
+
+    @media (max-width: 791px) {
+      width: 100%;
+    }
+  }
+
+  .contents-card-item-link {
+    text-decoration: none;
+
+    @media (max-width: 791px) {
+      width: 100%;
+    }
   }
 `;
 

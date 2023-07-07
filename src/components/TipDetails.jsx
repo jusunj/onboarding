@@ -122,16 +122,18 @@ const StyledTipDetails = styled.div`
     margin-bottom: 40px;
     max-width: 588px;
     height: auto;
+    
+    @media (max-width: 791px) {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
 
     img {
       border-radius: 16px;
       width: 100%;
-      max-width: 588px;
+      // max-width: 588px;
       height: auto;
-    }
-    
-    @media (max-width: 791px) {
-      margin-bottom: 30px;
     }
   }
 

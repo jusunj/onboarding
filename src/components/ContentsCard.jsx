@@ -11,7 +11,7 @@ const ContentsCard = ({
   img,
   date,
 }) => {
-
+  
   return (
     <StyledContentsCard>
       <div className="contents-card-image-wrapper">
