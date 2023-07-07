@@ -5,6 +5,8 @@ import ContentsCardRecommendItem from "./ContentsCardRecommendItem";
 const ContentsCardRecommend = ({
   dataset,
   mobileSize,
+  rowMargin,
+  rowMarginMobile
 }) => {
   // 브라우저 크기
   const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
@@ -25,7 +27,7 @@ const ContentsCardRecommend = ({
   }, [browserWidth]);
 
   return (
-    <StyledContentsCardRecommend mobileSize={mobileSize} browserWidth={browserWidth}>
+    <StyledContentsCardRecommend mobileSize={mobileSize} browserWidth={browserWidth} rowMargin={rowMargin} rowMarginMobile={rowMarginMobile}>
       <div className="contents-card-recommend-row">
         {
           dataset.map((element)=>{
@@ -50,8 +52,8 @@ const StyledContentsCardRecommend = styled.div`
   .contents-card-recommend-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 419px 419px 419px;
     column-gap: 24px;
+    row-gap: ${(props)=>(props.rowMargin) ? 0 : props.rowMargin}px;
     
     @media (max-width: 791px) {
       ${(props)=>
@@ -71,6 +73,7 @@ const StyledContentsCardRecommend = styled.div`
         (props.mobileSize === 'small') ?
         css`
         column-gap: 20px;
+        row-gap: ${(props)=>(props.rowMarginMobile) ? 0 : props.rowMarginMobile}px;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 294px 294px;
         `

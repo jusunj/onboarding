@@ -13,8 +13,9 @@ function App() {
         // display: 'flex',
         // justifyContent: 'center',
         // alignItems: 'center',
-        width: "100%",
-        padding: "0 14px"
+
+        // width: "100%",
+        // padding: "0 14px"
       }}
     >
       {
@@ -26,10 +27,10 @@ function App() {
           img={data.thumbnail}
         />
       }
-      DUMMY TEXT
+      {/* DUMMY TEXT */}
       {
         true &&
-        <ContentsCardRecommend dataset={dataset} mobileSize={'large'}/>
+        <ContentsCardRecommend dataset={dataset} mobileSize={'small'} rowMargin={12} rowMarginMobile={10} />
       }
       {
         false &&

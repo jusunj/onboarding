@@ -31,8 +31,6 @@ const ContentsCardRecommendItem = ({
 };
 
 const StyledContentsCardRecommendItem = styled.div`
-  width: 384px;
-  height: 419px;
   cursor: pointer;
   -webkit-user-select: none; /* Chrome, Safari, Opera */
   -moz-user-select: none; /* Firefox */
@@ -56,8 +54,7 @@ const StyledContentsCardRecommendItem = styled.div`
     align-items: center;
     width: 100%;
     max-width: 100%;
-    height: 260px;
-    max-height: 260px;
+    height: auto;
     overflow: hidden;
 
     @media (max-width: 791px) {
@@ -81,6 +78,7 @@ const StyledContentsCardRecommendItem = styled.div`
   .contents-card-text-wrapper {
     text-align: left !important;
     padding-top: 20px;
+    height: 159px;
 
     @media (max-width: 791px) {
       padding-top: 10px;
