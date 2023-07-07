@@ -10,9 +10,11 @@ function App() {
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
+        // display: 'flex',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        width: "100%",
+        padding: "0 14px"
       }}
     >
       {
@@ -24,6 +26,7 @@ function App() {
           img={data.thumbnail}
         />
       }
+      DUMMY TEXT
       {
         true &&
         <ContentsCardRecommend dataset={dataset} mobileSize={'large'}/>

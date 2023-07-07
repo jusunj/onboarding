@@ -38,6 +38,7 @@ const StyledContentsCardRecommendItem = styled.div`
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
+  white-space: normal;
   
   @media (max-width: 791px) {
     width: ${
@@ -92,7 +93,7 @@ const StyledContentsCardRecommendItem = styled.div`
       word-break: break-all;
 
       @media (max-width: 791px) {
-        ${(props)=>(props.mobileSize) ? Header18 : Header14}
+        ${(props)=>(props.mobileSize === 'large') ? Header18 : Header14}
         margin-bottom: 8px;
       }
     }
@@ -108,7 +109,7 @@ const StyledContentsCardRecommendItem = styled.div`
       text-overflow: ellipsis;
 
       @media (max-width: 791px) {
-        ${(props)=>(props.mobileSize) ? ContentsBody14 : ContentsBody13}
+        ${(props)=>(props.mobileSize === 'large') ? ContentsBody14 : ContentsBody13}
       }
     }
   }

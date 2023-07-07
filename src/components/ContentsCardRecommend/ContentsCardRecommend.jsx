@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled, { css } from "styled-components";
 import ContentsCardRecommendItem from "./ContentsCardRecommendItem";
 
@@ -6,27 +6,82 @@ const ContentsCardRecommend = ({
   dataset,
   mobileSize,
 }) => {
-  console.log(dataset);
+  // 브라우저 크기
+  const [browserWidth, setBrowserWidth] = useState(document.documentElement.clientWidth);
+  const resizeTimer = useRef(null);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      if (resizeTimer.current !== null) return;
+      resizeTimer.current = setTimeout(() => {
+        resizeTimer.current = null;
+        setBrowserWidth(window.innerWidth);
+      }, 200);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.addEventListener("resize", handleResize);
+    };
+  }, [browserWidth]);
 
   return (
-    <StyledContentsCardRecommend mobileSize={mobileSize}>
-      <ContentsCardRecommendItem
-        title={dataset[0].name}
-        subtitle={dataset[0].sub}
-        img={dataset[0].thumbnail}
-        mobileSize={mobileSize}
-      />
+    <StyledContentsCardRecommend mobileSize={mobileSize} browserWidth={browserWidth}>
+      <div className="contents-card-recommend-row">
+        {
+          dataset.map((element)=>{
+            if (element)
+
+            return (
+              <ContentsCardRecommendItem
+                title={element.name}
+                subtitle={element.sub}
+                img={element.thumbnail}
+                mobileSize={mobileSize}
+              />
+            );
+          })
+        }
+      </div>
     </StyledContentsCardRecommend>
   );
 };
 
 const StyledContentsCardRecommend = styled.div`
-  display: 'grid';
-  gridTemplateColumns: '384px 384px 384px';
-  gridTemplateRows: '419px 419px 419px';
-
-  @media (max-width: 791px) {
+  .contents-card-recommend-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 419px 419px 419px;
+    column-gap: 24px;
     
+    @media (max-width: 791px) {
+      ${(props)=>
+        (props.mobileSize === 'large') ?
+        css`
+        display: flex;
+        white-space: nowrap;
+        column-gap: 20px;
+        float: left;
+        overflow: auto;
+        `
+        :
+        ``
+      }
+
+      ${(props)=>
+        (props.mobileSize === 'small') ?
+        css`
+        column-gap: 20px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 294px 294px;
+        `
+        :
+        ``
+      }
+    }
+  }
+
+  .contents-card-recommend-row::-webkit-scrollbar {
+    // display: none;
   }
 `;
 
