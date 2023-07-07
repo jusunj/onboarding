@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import axios from "axios";
 import {
   Header30, Header24,
   ContentsBody16, ContentsBody15, ContentsBody14, ContentsBody13
@@ -10,41 +9,13 @@ const ContentsCard = ({
   title,
   subtitle,
   img,
-  // mobileImgHeight,
   date,
 }) => {
 
-  const [imageData, setImageData] = useState(null);
-
-  useEffect(()=>{
-    if (img.startsWith('/')) {
-      fetchImageData();
-    }
-  }, []);
-
-  const fetchImageData = async () => {
-    try {
-      const response = await axios.get(img, {
-        headears: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-      });
-      // setImageData(response.data);
-      console.log(response);
-      const blob = new Blob([response.data], { type: 'image/png' });
-      console.log(blob);
-    }
-    catch (error) {
-      console.error('ERROR WHILE FETCHING>>>', error);
-    }
-  };
-
   return (
-    <StyledContentsCard
-      // mobileImgHeight={mobileImgHeight}
-    >
+    <StyledContentsCard>
       <div className="contents-card-image-wrapper">
-        <img className="contents-card-image" src={(imageData ? imageData: img)} alt="IMAGE NOT FOUND"/>
+        <img className="contents-card-image" src={img} alt="IMAGE NOT FOUND"/>
       </div>
       <div className="contents-card-text-wrapper">
         <div className="contents-card-text">
@@ -94,8 +65,6 @@ const StyledContentsCard = styled.div`
       max-width: 100%;
       height: 240px;
       max-height: 240px;
-      // height: ${(props)=>props.mobileImgHeight}px;
-      // max-height: ${(props)=>props.mobileImgHeight}px;
       overflow: hidden;
     }
     

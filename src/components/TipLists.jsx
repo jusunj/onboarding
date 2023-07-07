@@ -58,7 +58,6 @@ const TipLists = ({
                     subtitle={element.sub}
                     img={element.thumbnail}
                     date={element.date}
-                    onClick={()=>{/* goto some specific url by using 'url' attribute in json files. */}}
                   />
                 </Link>
               </div>
