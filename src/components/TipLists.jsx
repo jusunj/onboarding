@@ -81,7 +81,6 @@ const StyledTipLists = styled.div`
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
 
-
   @media (max-width: 791px) {
     margin-top: 0px;
     margin-bottom: 80px;

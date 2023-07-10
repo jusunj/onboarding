@@ -82,10 +82,14 @@ const StyledContentsCard = styled.div`
   
   // 텍스트
   .contents-card-text-wrapper {
-    // margin: auto;
     padding-left: 48px;
     text-align: left !important;
 
+    @media (min-width: 792px) {
+      margin: auto;
+      margin-left: 0px;
+    }
+    
     @media (max-width: 791px) {
       padding-left: 0px;
       padding-top: 20px;
